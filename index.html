@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramadan RHCSA Training</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="app">
+        <!-- Dashboard/Landing Page -->
+        <div id="dashboard" class="view active">
+            <header class="header">
+                <div class="header-content">
+                    <h1>Ramadan RHCSA Training</h1>
+                    <p>Guided by Mushfiqur Rahman</p>
+                </div>
+            </header>
+
+            <main class="container">
+                <section class="modules-grid">
+                    <!-- Class Card -->
+                    <div class="module-card" onclick="openClass('2026-02-24')">
+                        <div class="module-date">24 ফেব্রুয়ারি 2026</div>
+                        <h2 class="module-title">Class 01: Introduction & Kernel vs OS</h2>
+                        <p class="module-desc">Linux কী, Kernel এবং OS এর পার্থক্য, Linux এর ইতিহাস এবং ডিস্ট্রিবিউশন
+                            নিয়ে বিস্তারিত আলোচনা।</p>
+                        <div class="module-footer">
+                            <span class="status completed">Completed</span>
+                            <span class="action-btn">View Lesson &rarr;</span>
+                        </div>
+                    </div>
+
+
+                </section>
+            </main>
+        </div>
+
+        <!-- Class Content Detail Page -->
+        <div id="class-view" class="view">
+            <nav class="top-nav">
+                <button class="back-btn" onclick="goBack()">&larr; Back to Dashboard</button>
+            </nav>
+
+            <main class="container class-container">
+                <header class="class-header">
+                    <span class="badge">24 ফেব্রুয়ারি 2026</span>
+                    <h1>Class 01: Introduction & Kernel vs OS</h1>
+                </header>
+
+                <div class="content-wrapper" id="lesson-content">
+                    <!-- Dynamic content will be loaded here -->
+                </div>
+
+                <div class="quiz-section mt-5" id="quiz-section">
+                    <h2>Knowledge Check</h2>
+                    <p class="text-muted">আজকের ক্লাসের উপর ভিত্তি করে কিছু প্রশ্ন</p>
+                    <div id="quiz-container">
+                        <!-- Quiz questions will be injected here -->
+                    </div>
+                    <button class="btn btn-primary mt-3" onclick="submitQuiz()">Submit Answers</button>
+                    <div id="quiz-result" class="quiz-result hidden"></div>
+                </div>
+            </main>
+        </div>
+        <!-- Footer -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <p>&copy; 2026 Ramadan RHCSA Training. Developed by <a href="https://www.linkedin.com/in/pkmzihad/"
+                        target="_blank" class="footer-link">Zihad Hasan</a>.</p>
+                <div class="social-links">
+                    <a href="https://zihadhasan.web.app/" target="_blank" aria-label="Portfolio" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                            <path
+                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/pkmzihad/" target="_blank" aria-label="LinkedIn"
+                        class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z">
+                            </path>
+                            <rect x="2" y="9" width="4" height="12"></rect>
+                            <circle cx="4" cy="4" r="2"></circle>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/zihaaaad/zihaaaad" target="_blank" aria-label="GitHub"
+                        class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="https://facebook.com/pkmzihad10" target="_blank" aria-label="Facebook" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
