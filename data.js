@@ -314,12 +314,5 @@ const classData = {
                 correctAnswer: 1
             }
         ]
-    },
-    '2026-02-26': {
-        title: "File System & Commands",
-        description: "Linux File System Hierarchy এবং বেসিক কমান্ড লাইন অপারেশন।",
-        status: "upcoming",
-        content: "",
-        questions: []
     }
 };

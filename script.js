@@ -17,23 +17,17 @@ function renderDashboard() {
     // Sort dates or iterate
     Object.keys(classData).sort().forEach(dateStr => {
         const data = classData[dateStr];
-        const isCompleted = data.status === 'completed';
 
         let cardClass = "module-card";
-        if (!isCompleted) cardClass += " disabled";
-
-        let onClickAction = isCompleted ? `onclick="openClass('${dateStr}')"` : "";
-        let statusBadgeClass = isCompleted ? "status completed" : "status upcoming";
-        let statusText = isCompleted ? "Completed" : "Upcoming";
-        let actionBtn = isCompleted ? `<span class="action-btn">View Lesson &rarr;</span>` : "";
+        let onClickAction = `onclick="openClass('${dateStr}')"`;
+        let actionBtn = `<span class="action-btn">View Lesson &rarr;</span>`;
 
         const cardHtml = `
             <div class="${cardClass}" ${onClickAction}>
                 <div class="module-date">${formatDate(dateStr)}</div>
                 <h2 class="module-title">${data.title}</h2>
                 <p class="module-desc">${data.description}</p>
-                <div class="module-footer">
-                    <span class="${statusBadgeClass}">${statusText}</span>
+                <div class="module-footer" style="justify-content: flex-end;">
                     ${actionBtn}
                 </div>
             </div>
