@@ -314,5 +314,581 @@ const classData = {
                 correctAnswer: 1
             }
         ]
+    },
+    '2026-02-27': {
+        title: "Linux Command Line Environment",
+        description: "Command Line, Terminal, Shell, Kernel, TTY, SSH এবং Linux Command-এর Basic Part নিয়ে বিস্তারিত আলোচনা।",
+        status: "published",
+        content: `
+            <div class="lesson-intro">
+                <h2>Linux Command Line Environment</h2>
+                <h3>Command Line কী?</h3>
+                <p>ধরো তুমি কম্পিউটার দিয়ে কোনো কাজ করাতে চাও। তুমি দুইভাবে বলতে পারো:</p>
+                <ul>
+                    <li>মাউস দিয়ে ক্লিক করে</li>
+                    <li>লিখে কমান্ড দিয়ে</li>
+                </ul>
+                <p>লিখে কাজ বলার পদ্ধতিটাই হলো Command Line।</p>
+                <div class="highlight-box success">
+                    <p><strong>মানে: Command Line = কীবোর্ড দিয়ে লিখে কম্পিউটারকে নির্দেশ দেওয়া?</strong></p>
+                </div>
+                <p>লিখলে <code>date</code> → কম্পিউটার বর্তমান তারিখ ও সময় দেখাবে।</p>
+                <div class="terminal-block">
+                    <code>itbd@server:~$ date<br>Wed Feb 25 10:25:09 +06 2026</code>
+                </div>
+                <p>লিখলে <code>whoami</code> → কম্পিউটার দেখাবে তুমি কোন user হিসেবে লগইন করে আছো।</p>
+                <div class="terminal-block">
+                    <code>itbd@server:~$ whoami<br>itbd</code>
+                </div>
+                <p>এখানে তুমি লিখছো — কম্পিউটার কাজ করছে।</p>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Terminal কী? বোঝার জন্য একটি রেস্টুরেন্ট কল্পনা করি</h2>
+                <p>ধরো তুমি একটা বড়, ব্যস্ত রেস্টুরেন্টে গেলে। ভেতরে কী কী আছে?</p>
+                <div class="table-responsive">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>বাস্তব জগৎ (রেস্টুরেন্ট)</th>
+                                <th>কম্পিউটার সিস্টেম অংশ</th>
+                                <th>ব্যাখ্যা (সংক্ষেপে)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>তুমি (User)</td>
+                                <td><strong>User</strong></td>
+                                <td>যে নির্দেশ/অর্ডার দেয়</td>
+                            </tr>
+                            <tr>
+                                <td>টেবিল / অর্ডার কাউন্টার</td>
+                                <td><strong>Terminal</strong></td>
+                                <td>যেখানে User ইনপুট দেয়</td>
+                            </tr>
+                            <tr>
+                                <td>ওয়েটার / কাউন্টার স্টাফ</td>
+                                <td><strong>Shell</strong></td>
+                                <td>User-এর নির্দেশ Kernel পর্যন্ত পৌঁছে দেয়</td>
+                            </tr>
+                            <tr>
+                                <td>শেফ</td>
+                                <td><strong>Kernel</strong></td>
+                                <td>মূল প্রসেসিং করে, কাজ বাস্তবায়ন করে</td>
+                            </tr>
+                            <tr>
+                                <td>চুলা, হাঁড়ি, গ্যাস, ফ্রিজ</td>
+                                <td><strong>Hardware</strong></td>
+                                <td>বাস্তব যন্ত্রপাতি যেখানে কাজ সম্পন্ন হয়</td>
+                            </tr>
+                            <tr>
+                                <td>ম্যানেজার</td>
+                                <td><strong>OS</strong></td>
+                                <td>পুরো সিস্টেম পরিচালনা ও সমন্বয় করে</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>পুরো Flow পরিষ্কারভাবে দেখি</h3>
+                <div class="process-timeline">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>ধাপ ১: তুমি টেবিলে বসলে</h4>
+                            <p><strong>(Terminal)</strong></p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>ধাপ ২: তুমি ওয়েটারকে অর্ডার দিলে</h4>
+                            <p><strong>(Shell)</strong></p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>ধাপ ৩: ওয়েটার ম্যানেজারের নিয়ম মেনে অর্ডার পাঠালো</h4>
+                            <p><strong>(OS)</strong></p>
+                        </div>
+                    </div>
+                    <div class="process-step highlight">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>ধাপ ৪: ম্যানেজার শেফকে বললো রান্না শুরু করতে</h4>
+                            <p><strong>(Kernel)</strong></p>
+                        </div>
+                    </div>
+                    <div class="process-step highlight">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>ধাপ ৫: শেফ চুলা-হাঁড়ি ব্যবহার করে রান্না করলো</h4>
+                            <p><strong>(Hardware)</strong></p>
+                        </div>
+                    </div>
+                    <div class="process-step end">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h4>ধাপ ৬: খাবার আবার ওয়েটার এনে তোমার সামনে দিল</h4>
+                            <p><strong>(Output)</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="alert-note">
+                    <strong>গুরুত্বপূর্ণ বিষয়:</strong> তুমি সরাসরি:<br>
+                    ❌ শেফকে ডাকতে পারো না<br>
+                    ❌ চুলা ধরতে পারো না<br>
+                    ❌ রান্নাঘরে ঢুকতে পারো না
+                </div>
+
+                <h3>তাহলে Terminal আসলে কী?</h3>
+                <p>রেস্টুরেন্টে অর্ডার দেওয়ার কয়েকটা ব্যবস্থা থাকতে পারে:</p>
+                <ul>
+                    <li>টেবিলে বসে ওয়েটারকে বলা</li>
+                    <li>কাউন্টারে গিয়ে সরাসরি অর্ডার দেওয়া</li>
+                </ul>
+                <p>এই টেবিল বা কাউন্টার উইন্ডোই হলো Terminal। Terminal হলো সেই জায়গা, যেখানে দাঁড়িয়ে বা বসে তুমি অর্ডার দাও। এটা নিজে রান্না করে না। এটা শুধু যোগাযোগের জায়গা। <strong>Linux-এ Terminal হলো সেই স্ক্রিন/উইন্ডো যেখানে তুমি কমান্ড লেখো।</strong></p>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Shell কী?</h2>
+                <p>এখন ধরো তুমি বললে: "একটা বিরিয়ানি দিন।"</p>
+                <p>তোমার কথা কে শুনলো? ➔ ওয়েটার / কাউন্টার স্টাফ। এই লোকটাই হলো ➔ <strong>Shell</strong>।</p>
+                <div class="cards-grid">
+                    <div class="info-card">
+                        <div class="card-icon">👤</div>
+                        <h3>Shell কী করে? (রেস্টুরেন্টে)</h3>
+                        <ul class="feature-list">
+                            <li>তোমার কথা শোনে</li>
+                            <li>বোঝে</li>
+                            <li>সঠিকভাবে ভেতরে পাঠায়</li>
+                            <li>রান্না হয়ে গেলে ফলাফল এনে দেয়</li>
+                        </ul>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">💻</div>
+                        <h3>Linux-এ Shell:</h3>
+                        <ul class="feature-list">
+                            <li>তুমি কমান্ড লেখো</li>
+                            <li>Shell সেটা পড়ে ও বোঝে</li>
+                            <li>Kernel-এ পাঠায়</li>
+                            <li>ফলাফল এনে দেখায়</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Kernel (শেফ) কী করে?</h2>
+                <div class="cards-grid">
+                    <div class="info-card">
+                        <div class="card-icon">👨‍🍳</div>
+                        <h3>শেফ (Kernel in Restaurant):</h3>
+                        <ul class="feature-list">
+                            <li>চুলা ব্যবহার করে</li>
+                            <li>হাঁড়ি ব্যবহার করে</li>
+                            <li>আসল কাজটা করে</li>
+                        </ul>
+                        <p><em>(Shell রান্না করে না। Terminal তো একদমই না।)</em></p>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">⚙️</div>
+                        <h3>Linux-এ Kernel:</h3>
+                        <ul class="feature-list">
+                            <li>CPU ব্যবহার করে</li>
+                            <li>RAM ব্যবহার করে</li>
+                            <li>ডিস্ক ব্যবহার করে</li>
+                            <li>আসল কাজটা করে</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <h3>Important Note</h3>
+                    <p>এক রেস্টুরেন্টে অনেক টেবিল থাকতে পারে, একাধিক ওয়েটার থাকতে পারে, একেকটা আলাদা স্টাইল থাকতে পারে।</p>
+                    <p><strong>ঠিক তেমনি Linux-এ:</strong> একাধিক Terminal থাকতে পারে, একেকটায় আলাদা Shell চলতে পারে, আলাদা user লগইন থাকতে পারে।</p>
+                </div>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Shell vs Terminal (Example)</h2>
+                <p>নিচের উদাহরণটি ভালো করে দেখো -</p>
+                <div class="terminal-block">
+                    <code>itbd@server:~$ date<br>Wed Feb 25 10:25:09 +06 2026<br>itbd@server:~$<br>itbd@server:~$ whoami<br>itbd<br>itbd@server:~$<br>itbd@server:~$ hostname<br>server</code>
+                </div>
+                
+                <p>স্ক্রিনশটে বা এই উদাহরণে যে কালো উইন্ডোটা দেখা যাচ্ছে, ওটাই Terminal। কিন্তু একটা গুরুত্বপূর্ণ বিষয় পরিষ্কার করি:</p>
+                <div class="alert-note">
+                    <strong>কালো উইন্ডো = Terminal (Terminal Emulator), আর ভেতরে যে $ দিয়ে কমান্ড নিচ্ছে = Shell</strong>
+                </div>
+                <ul class="feature-list">
+                    <li>এই কালো উইন্ডোটা নিজে কিছু বোঝে না। এটা শুধু তোমার লেখা দেখায় এবং আউটপুট দেখায়। <strong>কিন্তু কমান্ড কে বুঝলো? ➔ Shell</strong></li>
+                    <li>তোমার স্ক্রিনের কালো উইন্ডোটা হলো Terminal — এটা রেস্টুরেন্টের অর্ডার কাউন্টারের মতো।</li>
+                    <li>ভেতরে যে <code>$</code> চিহ্নটা দেখা যাচ্ছে, সেটা বোঝায় Shell প্রস্তুত আছে — মানে ওয়েটার দাঁড়িয়ে আছে।</li>
+                    <li>তুমি লিখলে <code>whoami</code> — এটা অর্ডার দেওয়ার মতো।</li>
+                    <li>Shell (ওয়েটার) অর্ডারটা Kernel (বাবুর্চি)-এ পাঠায়।</li>
+                    <li>Kernel বিভিন্ন হার্ডওয়্যার ব্যবহার করে ভেতরে কাজ করে ফলাফল বের করে।</li>
+                    <li>তারপর Shell সেই ফলাফল তোমার সামনে output দেখায়: <code>itbd</code></li>
+                </ul>
+                <p>আশা করি এখন আর Terminal এবং Shell নিয়ে কোনো প্রব্লেম নেই।</p>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Types of Shells (বিভিন্ন প্রকার Shell)</h2>
+                <p>Shell অনেক প্রকারের হতে পারে, এবং তাদের মধ্যে কিছু জনপ্রিয় হলো:</p>
+                <div class="table-responsive">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>Shell এর নাম</th>
+                                <th>বৈশিষ্ট্য</th>
+                                <th>Default System Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Bash (Bourne Again Shell)</strong></td>
+                                <td>সবচেয়ে জনপ্রিয়, scripting সহজ</td>
+                                <td>Ubuntu, CentOS, RHEL</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sh (Bourne Shell)</strong></td>
+                                <td>পুরনো Unix shell, scripting সহজ</td>
+                                <td>Legacy systems</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Csh (C Shell)</strong></td>
+                                <td>C-ভাষার মত syntax</td>
+                                <td>BSD Unix</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tcsh</strong></td>
+                                <td>Csh-এর উন্নত সংস্করণ</td>
+                                <td>BSD/Unix</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ksh (Korn Shell)</strong></td>
+                                <td>Advanced scripting features</td>
+                                <td>AIX, Solaris</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Zsh (Z Shell)</strong></td>
+                                <td>Modern shell, customization & plugins</td>
+                                <td>Oh-My-Zsh জনপ্রিয়, macOS</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Fish (Friendly Interactive Shell)</strong></td>
+                                <td>Interactive use সহজ, color support</td>
+                                <td>Newer Linux distros</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Switching Shells (এক shell থেকে অন্য shell এ switch করা)</h3>
+                <div class="terminal-block">
+                    <code>itbd@server:~$ zsh<br>Command 'zsh' not found, but can be installed with:<br>sudo apt install zsh<br>itbd@server:~$ sudo apt install zsh<br>(...installation process...)<br>itbd@server:~$ zsh<br>server% echo $SHELL<br>/bin/bash<br>server% echo $0<br>zsh<br>server% ps -p $$<br>PID TTY TIME CMD<br>2894 pts/2 00:00:00 zsh<br>server% exit<br>itbd@server:~$ _</code>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>SL</th>
+                                <th>কমান্ড</th>
+                                <th>কী ঘটেছে</th>
+                                <th>ব্যাখ্যা (সংক্ষেপে)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td><code>zsh</code></td><td>Command not found</td><td>সিস্টেমে zsh ইনস্টল ছিল না</td></tr>
+                            <tr><td>2</td><td><code>sudo apt install zsh</code></td><td>Install শুরু</td><td>zsh ইনস্টল হয়েছে</td></tr>
+                            <tr><td>3</td><td><code>zsh</code></td><td>Shell চালু</td><td>zsh shell শুরু হয়েছে</td></tr>
+                            <tr><td>4</td><td><code>echo $SHELL</code></td><td>/bin/bash</td><td>Default shell এখনও bash</td></tr>
+                            <tr><td>5</td><td><code>echo $0</code></td><td>zsh</td><td>বর্তমানে active shell হলো zsh</td></tr>
+                            <tr><td>6</td><td><code>ps -p $$</code></td><td>CMD = zsh</td><td>Process confirm করছে zsh চলছে</td></tr>
+                            <tr><td>7</td><td><code>exit</code></td><td>bash এ ফেরা</td><td>zsh থেকে বের হয়ে আবার bash এ ফিরেছে</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Changing Default Shell Permanently</h3>
+                <div class="terminal-block">
+                    <code>itbd@server:~$ echo $SHELL<br>/usr/bin/bash<br>itbd@server:~$ which zsh<br>/usr/bin/zsh<br>itbd@server:~$ chsh -s /usr/bin/zsh<br>Password:<br>itbd@server:~$ exit</code>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>ধাপ</th>
+                                <th>কমান্ড</th>
+                                <th>কী করবে</th>
+                                <th>ফলাফল</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td><code>which zsh</code></td><td>zsh এর path দেখাবে</td><td>সাধারণত /usr/bin/zsh দেখাবে</td></tr>
+                            <tr><td>2</td><td><code>chsh -s /usr/bin/zsh</code></td><td>Default shell পরিবর্তন করবে</td><td>bash → zsh হবে</td></tr>
+                            <tr><td>3</td><td><code>logout</code> বা <code>exit</code></td><td>সেশন বন্ধ করবে</td><td>নতুন করে login প্রয়োজন</td></tr>
+                            <tr><td>4</td><td>আবার login</td><td>নতুন shell চালু হবে</td><td>এখন auto zsh চালু হবে</td></tr>
+                            <tr><td>5</td><td><code>echo $SHELL</code></td><td>verify করবে</td><td>/usr/bin/zsh দেখাবে</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Shell Facts & Prompt Structure</h2>
+                <div class="qa-container">
+                    <div class="qa-item">
+                        <h4><span class="q-mark">1.</span> RHEL-এর Default Shell</h4>
+                        <p>Red Hat Enterprise Linux (RHEL)-এ ডিফল্ট শেল হলো <strong>bash</strong> (GNU Bourne-Again Shell)। bash হলো পুরনো UNIX শেল Bourne Shell (sh)-এর উন্নত সংস্করণ।</p>
+                    </div>
+                    <div class="qa-item">
+                        <h4><span class="q-mark">2.</span> Shell Prompt কী?</h4>
+                        <p>যখন শেল interactive ভাবে ব্যবহার করা হয়, তখন এটি একটি লেখা দেখায়—এটাই shell prompt। এটি বোঝায় যে শেল এখন ইউজারের কমান্ড নেওয়ার জন্য প্রস্তুত।</p>
+                    </div>
+                    <div class="qa-item">
+                        <h4><span class="q-mark">3.</span> Normal User Prompt ($)</h4>
+                        <p>সাধারণ ইউজার লগইন করলে প্রম্পট <code>$</code> চিহ্ন দিয়ে শেষ হয়। উদাহরণ: <code>[user@host ~]$</code>. এতে বোঝা যায় এটি সাধারণ ইউজার, root না।</p>
+                    </div>
+                    <div class="qa-item">
+                        <h4><span class="q-mark">4.</span> Root Prompt (#)</h4>
+                        <p>যদি শেল root (superuser) হিসেবে চালানো হয়, তাহলে <code>$</code> এর জায়গায় <code>#</code> থাকে। উদাহরণ: <code>[root@host ~]#</code>. এটি ইচ্ছাকৃতভাবে আলাদা রাখা হয়েছে যাতে বোঝা যায় এখন তুমি superuser—ভুল করলে পুরো সিস্টেম ক্ষতিগ্রস্ত হতে পারে।</p>
+                    </div>
+                    <div class="qa-item">
+                        <h4><span class="q-mark">5.</span> Bash এর শক্তি</h4>
+                        <p>bash শুধু কমান্ড চালানোর জন্য না, এটি একটি শক্তিশালী scripting language। এটি দিয়ে automation, task scheduling, এবং জটিল কাজ করা যায়—যা অনেক সময় GUI দিয়ে কঠিন।</p>
+                    </div>
+                </div>
+
+                <h3 class="mt-5">Shell Prompt Structure</h3>
+                <div class="terminal-block text-center" style="font-size: 1.2rem; margin: 2rem 0; text-align: center;">
+                    <code><strong>itbd</strong>@<strong>server</strong>: <strong>~</strong> <strong>$</strong></code><br>
+                    <div style="display: flex; justify-content: space-around; font-size: 0.9rem; color: #64748b; margin-top: 0.5rem; text-align: center;">
+                        <span>১) User</span>
+                        <span>২) Hostname</span>
+                        <span>৩) Directory</span>
+                        <span>৪) Type</span>
+                    </div>
+                </div>
+                
+                <div class="cards-grid">
+                    <div class="info-card">
+                        <div class="card-icon">1️⃣</div>
+                        <h3>itbd (User)</h3>
+                        <p>এটা হলো বর্তমানে যে ইউজার দিয়ে লগইন করা হয়েছে। এখানে itbd ইউজার লগইন করা আছে।</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">2️⃣</div>
+                        <h3>server (Hostname)</h3>
+                        <p>এটা সিস্টেমের hostname। মানে এই কম্পিউটার/সার্ভারের নাম হলো server।</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">3️⃣</div>
+                        <h3>~ (Working Directory)</h3>
+                        <p>ইউজার এই মুহূর্তে কোন ডিরেক্টরিতে আছে সেটা বোঝাচ্ছে। <code>~</code> মানে হচ্ছে লগইন করা ইউজারের হোম ডিরেক্টরি। যদি সে /etc এর ভেতর থাকতো তাহলে এখানে <code>/etc</code> দেখাতো।</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">4️⃣</div>
+                        <h3>$ / # (User Type)</h3>
+                        <p><code>$</code> → Normal / Standard User<br><code>#</code> → Superuser (root)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Shell Command-এর Basic Part</h2>
+                <p>যখন আমরা shell prompt-এ কোনো command লিখি, সেটা সাধারণত ৩টা অংশে ভাগ করা যায়। পুরো লাইনটাকে বলা হয়: <strong>Command Line</strong></p>
+                
+                <div class="table-responsive">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>অংশ</th>
+                                <th>বিবরণ</th>
+                                <th>উদাহরণ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1. Command</strong></td>
+                                <td>এটি হলো যে প্রোগ্রামটি চালাতে চাই। এটা সবসময় শুরুতে থাকে।</td>
+                                <td><code>ls</code>, <code>useradd</code>, <code>hostnamectl</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>2. Options (Flags)</strong></td>
+                                <td>এগুলো command-এর আচরণ পরিবর্তন করে। সাধারণত <code>-</code> বা <code>--</code> দিয়ে শুরু হয়।</td>
+                                <td><code>-l</code>, <code>-a</code>, <code>-L</code></td>
+                            </tr>
+                            <tr>
+                                <td><strong>3. Arguments</strong></td>
+                                <td>target বা value যেগুলোর উপর command কাজ করে অথবা command-কে প্রয়োজনীয় তথ্য দেয়।</td>
+                                <td><code>user01</code>, <code>/etc</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3>Argument Examples</h3>
+                <div class="comparison-grid mt-4">
+                    <div class="comp-card windows">
+                        <div class="comp-header">Example 1: usermod -L user01</div>
+                        <ul class="comp-list">
+                            <li><strong>Command:</strong> <code>usermod</code> (user modify করার প্রোগ্রাম)</li>
+                            <li><strong>Option:</strong> <code>-L</code> (lock option)</li>
+                            <li><strong>Argument:</strong> <code>user01</code> (target object, যার account lock করা হবে)</li>
+                        </ul>
+                    </div>
+                    <div class="comp-card linux">
+                        <div class="comp-header">Example 2: hostnamectl set-hostname ITBD-Training</div>
+                        <ul class="comp-list">
+                            <li><strong>Command:</strong> <code>hostnamectl</code></li>
+                            <li><strong>Arg 1:</strong> <code>set-hostname</code> (action নির্ধারণ করছে)</li>
+                            <li><strong>Arg 2:</strong> <code>ITBD-Training</code> (নতুন নাম value দিচ্ছে)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="alert-note mt-4">
+                    <strong>Special Note:</strong> অনেক command আছে যেগুলো কোনো option বা argument ছাড়াই চলতে পারে (যেমন <code>date</code>, <code>whoami</code>, <code>pwd</code>)। আবার কিছু command আছে যেগুলো argument ছাড়া চলেই না (যেমন <code>cp file1 file2</code>)।
+                </div>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Logging in to a Local Computer</h2>
+                <p>Shell চালাতে হলে আগে কম্পিউটারে লগইন করতে হবে। লগইন করার জন্য যে text-based interface ব্যবহার করা হয়, সেটাকে বলে: <strong>Terminal</strong></p>
+                
+                <div class="cards-grid">
+                    <div class="info-card">
+                        <div class="card-icon">🖥️</div>
+                        <h3>1. Physical Console</h3>
+                        <p>যদি কম্পিউটারের সাথে সরাসরি monitor + keyboard যুক্ত থাকে, তাহলে সেটাকে বলে: Physical Console।</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">🖧</div>
+                        <h3>2. Virtual Console (TTY)</h3>
+                        <p>Linux একাধিক login session একসাথে চালাতে পারে। এগুলোকে বলে Virtual Console (TTY)। <code>Ctrl + Alt + F1</code> থেকে <code>F6</code> দিয়ে switch করা যায়।</p>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">🖱️</div>
+                        <h3>3. Graphical Login (GUI)</h3>
+                        <p>graphical environment চালু হবে, তারপর terminal program খুলতে হবে। Server-এ সাধারণত resource বাঁচানোর জন্য GUI চালানো হয় না।</p>
+                    </div>
+                </div>
+
+                <h3 class="mt-5">RHEL 8 / 9 TTY Table Mapping</h3>
+                <div class="table-responsive">
+                    <table class="modern-table">
+                        <thead>
+                            <tr>
+                                <th>TTY</th>
+                                <th>ব্যবহার</th>
+                                <th>সহজ ভাষায়</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>tty1</strong></td>
+                                <td>Graphical login + GUI session (GNOME)</td>
+                                <td>GUI চালানোর জন্য, যেখানে তুমি mouse + desktop পাবে</td>
+                            </tr>
+                            <tr>
+                                <td><strong>tty2–tty6</strong></td>
+                                <td>Text login (CLI)</td>
+                                <td>শুধুমাত্র keyboard দিয়ে login করতে হবে, command-line interface</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Remote login over network (SSH)</h2>
+                <p>অনেক সময় Linux admin বা user-দের দূর থেকে কোনো সার্ভার বা কম্পিউটারে কাজ করতে হয়। অনেক সার্ভার এখন <strong>headless</strong> – অর্থাৎ, physical monitor, keyboard বা mouse নেই।</p>
+                
+                <div class="highlight-box">
+                    <h3>Headless Server কী?</h3>
+                    <p>সার্ভার/VM নিজের জন্য কোনো physical screen, keyboard, mouse নেই। ব্যবহারকারীকে কাজ network বা remote interface (SSH/RDP) দিয়ে করতে হয়।</p>
+                </div>
+
+                <h3>SSH (Secure Shell)</h3>
+                <p>Linux এবং macOS-এ built-in ssh command-line tool আছে। SSH encrypts the connection, তাই communication, password বা data safe থাকে।</p>
+                <div class="terminal-block">
+                    <code>ssh remoteuser@remotehost<br>remoteuser@remotehost's password: ********<br>[remoteuser@remotehost ~]$</code>
+                </div>
+
+                <h3>Public Key Authentication (password-less login)</h3>
+                <p>কিছু systems (যেমন cloud instances) password login allow করে না। এর বিকল্প হলো public/private key authentication।</p>
+                <ul class="feature-list">
+                    <li>User-এর machine-এ থাকে private key (গোপন)।</li>
+                    <li>Remote server-এর user account-এ থাকে matching public key।</li>
+                    <li>Login করলে SSH private key ব্যবহার করে public key verify করে, password চায় না।</li>
+                </ul>
+                
+                <div class="terminal-block mt-3">
+                    <code>ssh -i ~/.ssh/my_private_key remoteuser@remotehost</code>
+                </div>
+                <p>এখানে <code>-i</code> option ব্যবহার করে private key specify করা হচ্ছে।</p>
+            </div>
+        `,
+        questions: [
+            {
+                id: 6,
+                text: "Command Line-এর ৩টি অংশ কী কী?",
+                options: [
+                    "Terminal, Shell, Kernel",
+                    "Command, Options, Arguments",
+                    "User, Hostname, Directory",
+                    "Hardware, OS, Software"
+                ],
+                correctAnswer: 1
+            },
+            {
+                id: 7,
+                text: "Shell prompt-এ ~ চিহ্নটি কী নির্দেশ করে?",
+                options: [
+                    "Root directory",
+                    "Working directory",
+                    "Home directory",
+                    "Previous directory"
+                ],
+                correctAnswer: 2
+            },
+            {
+                id: 8,
+                text: "$ চিহ্নটি কোন ধরনের user নির্দেশ করে?",
+                options: [
+                    "Superuser (root)",
+                    "Normal (standard) user",
+                    "System user",
+                    "Guest user"
+                ],
+                correctAnswer: 1
+            },
+            {
+                id: 9,
+                text: "Remote login secure করার protocol কোনটি?",
+                options: [
+                    "FTP",
+                    "HTTP",
+                    "SSH (Secure Shell)",
+                    "Telnet"
+                ],
+                correctAnswer: 2
+            },
+            {
+                id: 10,
+                text: "RHEL-এর Default Shell কোনটি?",
+                options: [
+                    "Zsh",
+                    "Fish",
+                    "Bash (Bourne Again Shell)",
+                    "Sh"
+                ],
+                correctAnswer: 2
+            }
+        ]
     }
 };
