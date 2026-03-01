@@ -1,894 +1,464 @@
-// Data for classes
+// =============================================
+// Ramadan RHCSA Training — Class Data
+// =============================================
+// HOW TO ADD A NEW CLASS:
+// 1. Add a new key with the date (YYYY-MM-DD format)
+// 2. Fill in title, classNumber, description
+// 3. Add sections[] array with content blocks
+// 4. Add questions[] array for the quiz
+// See README.md for full block-type reference.
+// =============================================
+
 const classData = {
+
+    // ========================================
+    // CLASS 01 — 24 February 2026
+    // ========================================
     '2026-02-24': {
         title: "Introduction & Kernel vs OS",
+        classNumber: 1,
         description: "Linux কী, Kernel এবং OS এর পার্থক্য, Linux এর ইতিহাস এবং ডিস্ট্রিবিউশন নিয়ে বিস্তারিত আলোচনা।",
-        status: "published",
-        content: `
-            <div class="lesson-intro">
-                <h2>Introduction</h2>
-                <div class="quote-block">
-                    <p>"আজ আমরা যে জিনিসটা শুরু করতে যাচ্ছি, সেটার নাম Linux। অনেকে নাম শুনে ভয় পায়। ভাবে এটা খুব কঠিন। কিন্তু আমি শুরুতেই একটা কথা পরিষ্কার বলি <strong>Linux কঠিন না। Linux শুধু নতুন।</strong>"</p>
-                    <p>"আপনি যদি Windows ব্যবহার করতে পারেন, আপনি যদি একটি মোবাইল ব্যবহার করতে পারেন, তাহলে আপনি Linux শিখতে পারবেন – ১০০% নিশ্চিত।"</p>
-                </div>
-                <p><strong>Linux মানে শুধু কালো স্ক্রিন না। Linux মানে শুধু হ্যাকিংও না। Linux মানে হলো – নিজের সিস্টেমের উপর পূর্ণ Control।</strong></p>
-                <p>Linux আসলে একটি Kernel – অর্থাৎ Operating System-এর core অংশ, যা সরাসরি hardware নিয়ন্ত্রণ করে। এই Linux Kernel-কে ভিত্তি করে তৈরি হওয়া Operating System দিয়েই Google, Facebook, Amazon-এর মতো বিশ্বের বড় বড় কোম্পানির server চলে। আজ আমরা সেই Linux Kernel-ভিত্তিক Operating System শেখা শুরু করছি।</p>
-                
-                <div class="terminal-block">
-                    <code>uname -r<br>6.8.0-31-generic</code>
-                </div>
-                
-                <div class="highlight-box success">
-                    <h3>Linux = ২০% Concept, ৮০% Practice</h3>
-                    <p>"Linux হলো হাতে-কলমে শেখার জিনিস। এখানে theory আছে – কিন্তু theory যথেষ্ট না।" আপনি যত বেশি command টাইপ করবেন, যত বেশি system explore করবেন, তত দ্রুত Linux আপনার কাছে পরিষ্কার হবে। ভুল করবেন – এটা স্বাভাবিক। Error দেখবেন – এটাও স্বাভাবিক। <strong>Linux-এ ভুল করা মানে ব্যর্থ হওয়া না। Linux-এ ভুল করা মানে system-কে আরও গভীরভাবে বোঝা।</strong></p>
-                    <p>"Linux শেখা মানে শুধু Operating System শেখা না – Problem solve করার mindset শেখা। আজ থেকে আমরা শুধু user না – আমরা system বুঝতে শিখবো।"</p>
-                </div>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Definitions: Kernel vs OS</h2>
-                <div class="cards-grid">
-                    <div class="info-card">
-                        <div class="card-icon">⚙️</div>
-                        <h3>Kernel (কার্নেল) কী?</h3>
-                        <p>Kernel হলো OS-এর core অংশ, যেটা সরাসরি hardware-এর সাথে কথা বলে।</p>
-                        <ul class="feature-list">
-                            <li><strong>CPU কে বলে:</strong> কোন কাজ কখন করবে</li>
-                            <li><strong>RAM কে বলে:</strong> কে কত মেমরি পাবে</li>
-                            <li><strong>Disk কে বলে:</strong> কোথায় পড়বে/লিখবে</li>
-                            <li>Keyboard, Mouse, Network card চালায়</li>
-                        </ul>
-                        <div class="alert-note">
-                            <strong>Note:</strong> তুমি দেখতে পাও আসতে পাও না, সরাসরি ব্যবহার করো না, কিন্তু সব কাজ Kernel ছাড়া অসম্ভব। Kernel ছাড়া কম্পিউটার = মৃত লোহা।
-                        </div>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-icon">💻</div>
-                        <h3>Operating System (OS) কী?</h3>
-                        <p>Operating System হলো পুরো সিস্টেম, যেটা তুমি ব্যবহার করো।</p>
-                        <ul class="feature-list">
-                            <li><strong>Kernel</strong></li>
-                            <li><strong>Desktop / GUI</strong></li>
-                            <li><strong>Terminal / Shell</strong></li>
-                            <li><strong>File Manager & System Tools</strong></li>
-                        </ul>
-                        <div class="alert-note">
-                            <strong>Note:</strong> OS তোমার সাথে কথা বলে, তোমার কমান্ড বোঝে এবং Kernel-কে দিয়ে কাজ করায়।
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Process Flow: How it Works</h2>
-                <p>সম্পর্কটা কেমন? সবচেয়ে গুরুত্বপূর্ণ: নিচের ফ্লোটা মাথায় রাখুন। ঘটনা: তুমি "My Computer / This PC"- এ Double-Click করলে।</p>
-                
-                <div class="process-timeline">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>User Input → OS</h4>
-                            <p><strong>Step 1: তুমি (User):</strong> তুমি Mouse দিয়ে double-click করলে। এখানে তুমি শুধু OS-এর সাথে কাজ করছো। তুমি CPU, RAM কিছুই জানো না। Mouse / Keyboard event OS ধরে।</p>
-                        </div>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>OS Processing</h4>
-                            <p><strong>Step 2:</strong> OS বলে: "ওহ, User 'This PC' খুলতে চায়"। OS Mouse event ধরেছে, বুঝেছে কোন icon-এ click হয়েছে এবং File Explorer চালু করার সিদ্ধান্ত নিয়েছে। এখনো Kernel কিছু করেনি।</p>
-                        </div>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>OS → Kernel</h4>
-                            <p><strong>Step 3:</strong> OS এখন Kernel-কে বলে: "এই process (File Explorer) চালু করো", "Disk থেকে Drive information এনে দাও"।</p>
-                        </div>
-                    </div>
-                    <div class="process-step highlight">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>Kernel → Hardware (আসল কাজ)</h4>
-                            <p><strong>Step 4:</strong> Kernel এখন CPU-কে বলে process চালাতে, RAM-এ জায়গা দেয় এবং Disk driver ব্যবহার করে C:, D: drive-এর তথ্য আনে। <em>Kernel এখানে সরাসরি Hardware চালাচ্ছে।</em></p>
-                        </div>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h4>Kernel → OS</h4>
-                            <p><strong>Step 5:</strong> Kernel বলে: "এই নাও data (Drive list, space, status)", OS তখন সুন্দর করে GUI বানায়, Icon দেখায় এবং Window ওপেন করে।</p>
-                        </div>
-                    </div>
-                    <div class="process-step end">
-                        <div class="step-number">6</div>
-                        <div class="step-content">
-                            <h4>OS → Screen Output</h4>
-                            <p><strong>Step 6:</strong> তুমি ফলাফল দেখো (Local Disk C:, D: ইত্যাদি)। কাজ শেষ।</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Common Questions & ISO Files</h2>
-                <div class="qa-container">
-                    <div class="qa-item">
-                        <h4><span class="q-mark">Q:</span> Linux কি OS নাকি Kernel?</h4>
-                        <p><strong>উত্তর:</strong> Linux নিজে হলো Kernel, অর্থাৎ OS-এর core যা সরাসরি hardware-কে নিয়ন্ত্রণ করে। Kernel ছাড়া কোন program/hardware ঠিকভাবে কাজ করতে পারে না।</p>
-                    </div>
-                    <div class="qa-item">
-                        <h4><span class="q-mark">Q:</span> তাহলে OS কোনগুলো?</h4>
-                        <p><strong>উত্তর:</strong> OS হলো Kernel + User Space। User Space বলতে বোঝায়: Desktop / GUI, Terminal, File Manager ইত্যাদি। অর্থাৎ, User-কে যা ব্যবহার করার সুবিধা দেয়, সেটা মিলে OS হয়।</p>
-                    </div>
-                    <div class="qa-item">
-                        <h4><span class="q-mark">Q:</span> ডিস্ট্রিবিউশনগুলোকে কি OS বলতে পারি?</h4>
-                        <p><strong>উত্তর:</strong> হ্যাঁ, ১০০% পারি। উদাহরণ: Ubuntu, CentOS। কারণ এগুলো Linux Kernel + User Space একত্রিত করে।</p>
-                    </div>
-                    <div class="qa-item">
-                        <h4><span class="q-mark">Q:</span> ISO file আসলে কী? এটা কি OS?</h4>
-                        <p><strong>উত্তর:</strong> ISO ফাইলটা নিজে OS না, এটা হলো OS install করার প্যাকেট (Install image)। এর ভিতরে Kernel, System files, Installer, Driver থাকে। ISO দিয়ে Bootable USB বানিয়ে OS install করা হয়। (<strong>ISO ≠ OS</strong>, ISO → OS বানায়)।</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Linux History (ইতিহাস)</h2>
-                <div class="history-timeline">
-                    <div class="history-item">
-                        <div class="year">1980s</div>
-                        <div class="details">
-                            <h4>UNIX-এর যুগ</h4>
-                            <p>UNIX তখনকার সবচেয়ে শক্তিশালী OS ছিল কিন্তু দামি এবং closed source ছিল। গবেষকরা বুঝতে পারলো free OS দরকার।</p>
-                        </div>
-                    </div>
-                    <div class="history-item">
-                        <div class="year">1983</div>
-                        <div class="details">
-                            <h4>GNU Project শুরু</h4>
-                            <p>Richard Stallman শুরু করেন। লক্ষ্য: Everyone should have freedom. Compiler (GCC), Bash তৈরি হলো, কিন্তু Kernel missing ছিল।</p>
-                        </div>
-                    </div>
-                    <div class="history-item highlight">
-                        <div class="year">1991</div>
-                        <div class="details">
-                            <h4>Linux Kernel জন্ম</h4>
-                            <p>Linus Torvalds, Finland-এর ছাত্র, নিজের PC-তে UNIX-like OS চালাতে চেয়ে প্রথম Linux Kernel তৈরি করেন (Free and open-source)।</p>
-                        </div>
-                    </div>
-                    <div class="history-item">
-                        <div class="year">1992</div>
-                        <div class="details">
-                            <h4>Linux + GNU একত্রিত</h4>
-                            <p>Kernel + GNU tools = Complete user-friendly OS তৈরি হলো।</p>
-                        </div>
-                    </div>
-                    <div class="history-item">
-                        <div class="year">1993-95</div>
-                        <div class="details">
-                            <h4>প্রথম Popular Distributions</h4>
-                            <p>Slackware, Debian (1993), Red Hat (1994) রিলিজ হলো। Enterprise use শুরু।</p>
-                        </div>
-                    </div>
-                    <div class="history-item">
-                        <div class="year">2000s+</div>
-                        <div class="details">
-                            <h4>Linux everywhere</h4>
-                            <p>Ubuntu (2004) আসলো। Android (Linux based) বিলিয়ন ফোনে চললো। Cloud, IoT, Supercomputers—সব লিনাক্স নির্ভর হয়ে গেলো।</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Linux Distributions (Distros) – Overview</h2>
-                <p>Linux distribution হলো Linux Kernel + User Space Tools + Applications একত্রিত করে তৈরি করা complete OS।</p>
-                
-                <div class="table-responsive">
-                    <table class="modern-table">
-                        <thead>
-                            <tr>
-                                <th>Category</th>
-                                <th>Examples</th>
-                                <th>Use Case</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Desktop Distros</strong></td>
-                                <td>Ubuntu, Debian, Linux Mint</td>
-                                <td>Easy installation, GUI-based experience, beginner friendly.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Server/Enterprise</strong></td>
-                                <td>RHEL, CentOS, AlmaLinux</td>
-                                <td>Commercial support, stable for enterprise servers.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Lightweight</strong></td>
-                                <td>Lubuntu, Puppy Linux</td>
-                                <td>Low resource PCs, older hardware.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Security/Pen-testing</strong></td>
-                                <td>Kali Linux, Parrot</td>
-                                <td>Ethical hacking, penetration testing tools pre-installed.</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Rolling Release</strong></td>
-                                <td>Arch Linux, Manjaro</td>
-                                <td>Bleeding-edge latest software features, advanced users.</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="lts-box mt-4">
-                    <h3>LTS (Long Term Support) Version</h3>
-                    <p>LTS version হলো একটি Linux distribution release যা দীর্ঘ সময় (সাধারণত ৫ বছর) পর্যন্ত support ও security updates পায়। মূলত <strong>stability এবং reliability</strong> চাওয়ার জন্য তৈরি।</p>
-                    <p><em>উদাহরণ: Ubuntu 22.04 LTS (৫ বছরের সাপোর্ট)। বারবার আপগ্রেড ছাড়া একটানা কাজ করার জন্য প্রযোজ্য।</em></p>
-                </div>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Windows vs Linux (Comparison)</h2>
-                <p><em>খুব গুরুত্বপূর্ণ – Windows খারাপ, Linux ভালো – এমন বলবেন ফেব্রুয়ারি না। এদের design philosophy আলাদা, use-case আলাদা।</em> Properly configured Windows server খুব secure হতে পারে, আবার Poorly configured Linux server খুব insecure হতে পারে।</p>
-                
-                <div class="comparison-grid mt-4">
-                    <div class="comp-card windows">
-                        <div class="comp-header">🪟 Windows</div>
-                        <ul class="comp-list">
-                            <li><strong>নিয়ন্ত্রণ:</strong> Microsoft তৈরি ও নিয়ন্ত্রণ করে। (Closed source)</li>
-                            <li><strong>Cost:</strong> License কিনতে হয় (Paid)।</li>
-                            <li><strong>কাস্টমাইজেশন:</strong> Limited. গাড়ির মতো, ইঞ্জিন বদলানো যায় না।</li>
-                            <li><strong>File System:</strong> মূলত NTFS (C: drive)।</li>
-                            <li><strong>Security:</strong> Desktop market বেশি তাই malware বেশি।</li>
-                        </ul>
-                    </div>
-                    <div class="comp-card linux">
-                        <div class="comp-header">🐧 Linux</div>
-                        <ul class="comp-list">
-                            <li><strong>নিয়ন্ত্রণ:</strong> বিশ্বব্যাপী Community তৈরি করে। (Open source)</li>
-                            <li><strong>Cost:</strong> Free (Enterprise support বাদে)।</li>
-                            <li><strong>কাস্টমাইজেশন:</strong> Full customization. বাইকের মতো, ইচ্ছেমতো মডিফাই করা যায়।</li>
-                            <li><strong>File System:</strong> মূলত EXT4 (root /)।</li>
-                            <li><strong>Security:</strong> Strong permission framework, Server exploit বেশি টার্গেট করে।</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        `,
-        questions: [
+        sections: [
+            // --- Intro ---
             {
-                id: 1,
-                text: "Linux আসলে কী?",
-                options: [
-                    "শুধুমাত্র একটি Operating System",
-                    "একটি Kernel",
-                    "একটি হ্যাকিং টুল",
-                    "একটি সাধারণ সফটওয়্যার"
-                ],
-                correctAnswer: 1
+                type: 'section',
+                title: 'Introduction',
+                blocks: [
+                    {
+                        type: 'quote',
+                        text: [
+                            "\"আজ আমরা যে জিনিসটা শুরু করতে যাচ্ছি, সেটার নাম Linux। অনেকে নাম শুনে ভয় পায়। ভাবে এটা খুব কঠিন। কিন্তু আমি শুরুতেই একটা কথা পরিষ্কার বলি <strong>Linux কঠিন না। Linux শুধু নতুন।</strong>\"",
+                            "\"আপনি যদি Windows ব্যবহার করতে পারেন, আপনি যদি একটি মোবাইল ব্যবহার করতে পারেন, তাহলে আপনি Linux শিখতে পারবেন – ১০০% নিশ্চিত।\""
+                        ]
+                    },
+                    { type: 'paragraph', text: "<strong>Linux মানে শুধু কালো স্ক্রিন না। Linux মানে শুধু হ্যাকিংও না। Linux মানে হলো – নিজের সিস্টেমের উপর পূর্ণ Control।</strong>" },
+                    { type: 'paragraph', text: "Linux আসলে একটি Kernel – অর্থাৎ Operating System-এর core অংশ, যা সরাসরি hardware নিয়ন্ত্রণ করে। এই Linux Kernel-কে ভিত্তি করে তৈরি হওয়া Operating System দিয়েই Google, Facebook, Amazon-এর মতো বিশ্বের বড় বড় কোম্পানির server চলে। আজ আমরা সেই Linux Kernel-ভিত্তিক Operating System শেখা শুরু করছি।" },
+                    { type: 'terminal', commands: ['uname -r', '6.8.0-31-generic'] },
+                    {
+                        type: 'highlight',
+                        title: 'Linux = ২০% Concept, ৮০% Practice',
+                        text: [
+                            "\"Linux হলো হাতে-কলমে শেখার জিনিস। এখানে theory আছে – কিন্তু theory যথেষ্ট না।\" আপনি যত বেশি command টাইপ করবেন, যত বেশি system explore করবেন, তত দ্রুত Linux আপনার কাছে পরিষ্কার হবে। ভুল করবেন – এটা স্বাভাবিক। Error দেখবেন – এটাও স্বাভাবিক। <strong>Linux-এ ভুল করা মানে ব্যর্থ হওয়া না। Linux-এ ভুল করা মানে system-কে আরও গভীরভাবে বোঝা।</strong>",
+                            "\"Linux শেখা মানে শুধু Operating System শেখা না – Problem solve করার mindset শেখা। আজ থেকে আমরা শুধু user না – আমরা system বুঝতে শিখবো।\""
+                        ]
+                    }
+                ]
             },
+
+            // --- Kernel vs OS ---
             {
-                id: 2,
-                text: "Kernel এর মূল কাজ কী?",
-                options: [
-                    "ইউজারের সাথে কথা বলা",
-                    "স্ক্রিনে আইকন দেখানো",
-                    "সরাসরি hardware নিয়ন্ত্রণ করা",
-                    "ফাইল ম্যানেজার চালানো"
-                ],
-                correctAnswer: 2
+                type: 'section',
+                title: 'Definitions: Kernel vs OS',
+                blocks: [
+                    {
+                        type: 'cards',
+                        items: [
+                            {
+                                icon: '⚙️',
+                                title: 'Kernel (কার্নেল) কী?',
+                                text: 'Kernel হলো OS-এর core অংশ, যেটা সরাসরি hardware-এর সাথে কথা বলে।',
+                                list: [
+                                    '<strong>CPU কে বলে:</strong> কোন কাজ কখন করবে',
+                                    '<strong>RAM কে বলে:</strong> কে কত মেমরি পাবে',
+                                    '<strong>Disk কে বলে:</strong> কোথায় পড়বে/লিখবে',
+                                    'Keyboard, Mouse, Network card চালায়'
+                                ],
+                                alert: 'তুমি দেখতে পাও আসতে পাও না, সরাসরি ব্যবহার করো না, কিন্তু সব কাজ Kernel ছাড়া অসম্ভব। Kernel ছাড়া কম্পিউটার = মৃত লোহা।'
+                            },
+                            {
+                                icon: '💻',
+                                title: 'Operating System (OS) কী?',
+                                text: 'Operating System হলো পুরো সিস্টেম, যেটা তুমি ব্যবহার করো।',
+                                list: [
+                                    '<strong>Kernel</strong>',
+                                    '<strong>Desktop / GUI</strong>',
+                                    '<strong>Terminal / Shell</strong>',
+                                    '<strong>File Manager & System Tools</strong>'
+                                ],
+                                alert: 'OS তোমার সাথে কথা বলে, তোমার কমান্ড বোঝে এবং Kernel-কে দিয়ে কাজ করায়।'
+                            }
+                        ]
+                    }
+                ]
             },
+
+            // --- Process Flow ---
             {
-                id: 3,
-                text: "ISO file কী?",
-                options: [
-                    "এটি নিজেই একটি OS",
-                    "এটি OS install করার প্যাকেট",
-                    "একটি হার্ডওয়্যার ড্রাইভার",
-                    "একটি প্রোগ্রামিং ভাষা"
-                ],
-                correctAnswer: 1
+                type: 'section',
+                title: 'Process Flow: How it Works',
+                subtitle: 'সম্পর্কটা কেমন? সবচেয়ে গুরুত্বপূর্ণ: নিচের ফ্লোটা মাথায় রাখুন। ঘটনা: তুমি "My Computer / This PC"- এ Double-Click করলে।',
+                blocks: [
+                    {
+                        type: 'timeline',
+                        steps: [
+                            { title: 'User Input → OS', text: '<strong>Step 1: তুমি (User):</strong> তুমি Mouse দিয়ে double-click করলে। এখানে তুমি শুধু OS-এর সাথে কাজ করছো। তুমি CPU, RAM কিছুই জানো না। Mouse / Keyboard event OS ধরে।' },
+                            { title: 'OS Processing', text: '<strong>Step 2:</strong> OS বলে: "ওহ, User \'This PC\' খুলতে চায়"। OS Mouse event ধরেছে, বুঝেছে কোন icon-এ click হয়েছে এবং File Explorer চালু করার সিদ্ধান্ত নিয়েছে। এখনো Kernel কিছু করেনি।' },
+                            { title: 'OS → Kernel', text: '<strong>Step 3:</strong> OS এখন Kernel-কে বলে: "এই process (File Explorer) চালু করো", "Disk থেকে Drive information এনে দাও"।' },
+                            { title: 'Kernel → Hardware (আসল কাজ)', text: '<strong>Step 4:</strong> Kernel এখন CPU-কে বলে process চালাতে, RAM-এ জায়গা দেয় এবং Disk driver ব্যবহার করে C:, D: drive-এর তথ্য আনে। <em>Kernel এখানে সরাসরি Hardware চালাচ্ছে।</em>', highlight: true },
+                            { title: 'Kernel → OS', text: '<strong>Step 5:</strong> Kernel বলে: "এই নাও data (Drive list, space, status)", OS তখন সুন্দর করে GUI বানায়, Icon দেখায় এবং Window ওপেন করে।' },
+                            { title: 'OS → Screen Output', text: '<strong>Step 6:</strong> তুমি ফলাফল দেখো (Local Disk C:, D: ইত্যাদি)। কাজ শেষ।' }
+                        ]
+                    }
+                ]
             },
+
+            // --- Common Questions ---
             {
-                id: 4,
-                text: "Linux Kernel-এর স্রষ্টা কে?",
-                options: [
-                    "Richard Stallman",
-                    "Bill Gates",
-                    "Linus Torvalds",
-                    "Steve Jobs"
-                ],
-                correctAnswer: 2
+                type: 'section',
+                title: 'Common Questions & ISO Files',
+                blocks: [
+                    {
+                        type: 'qa',
+                        items: [
+                            { question: 'Linux কি OS নাকি Kernel?', answer: 'Linux নিজে হলো Kernel, অর্থাৎ OS-এর core যা সরাসরি hardware-কে নিয়ন্ত্রণ করে। Kernel ছাড়া কোন program/hardware ঠিকভাবে কাজ করতে পারে না।' },
+                            { question: 'তাহলে OS কোনগুলো?', answer: 'OS হলো Kernel + User Space। User Space বলতে বোঝায়: Desktop / GUI, Terminal, File Manager ইত্যাদি। অর্থাৎ, User-কে যা ব্যবহার করার সুবিধা দেয়, সেটা মিলে OS হয়।' },
+                            { question: 'ডিস্ট্রিবিউশনগুলোকে কি OS বলতে পারি?', answer: 'হ্যাঁ, ১০০% পারি। উদাহরণ: Ubuntu, CentOS। কারণ এগুলো Linux Kernel + User Space একত্রিত করে।' },
+                            { question: 'ISO file আসলে কী? এটা কি OS?', answer: 'ISO ফাইলটা নিজে OS না, এটা হলো OS install করার প্যাকেট (Install image)। এর ভিতরে Kernel, System files, Installer, Driver থাকে। ISO দিয়ে Bootable USB বানিয়ে OS install করা হয়। (<strong>ISO ≠ OS</strong>, ISO → OS বানায়)।' }
+                        ]
+                    }
+                ]
             },
+
+            // --- Linux History ---
             {
-                id: 5,
-                text: "নিচের কোনটি LTS (Long Term Support) এর বৈশিষ্ট্য?",
-                options: [
-                    "দ্রুততম সফটওয়্যার আপডেট",
-                    "দীর্ঘ সময় পর্যন্ত security updates",
-                    "শুধু হ্যাকিং এর জন্য তৈরি",
-                    "সবচেয়ে নতুন পরীক্ষামূলক ফিচার"
-                ],
-                correctAnswer: 1
+                type: 'section',
+                title: 'Linux History (ইতিহাস)',
+                blocks: [
+                    {
+                        type: 'history',
+                        items: [
+                            { year: '1980s', title: 'UNIX-এর যুগ', text: 'UNIX তখনকার সবচেয়ে শক্তিশালী OS ছিল কিন্তু দামি এবং closed source ছিল। গবেষকরা বুঝতে পারলো free OS দরকার।' },
+                            { year: '1983', title: 'GNU Project শুরু', text: 'Richard Stallman শুরু করেন। লক্ষ্য: Everyone should have freedom. Compiler (GCC), Bash তৈরি হলো, কিন্তু Kernel missing ছিল।' },
+                            { year: '1991', title: 'Linux Kernel জন্ম', text: 'Linus Torvalds, Finland-এর ছাত্র, নিজের PC-তে UNIX-like OS চালাতে চেয়ে প্রথম Linux Kernel তৈরি করেন (Free and open-source)।', highlight: true },
+                            { year: '1992', title: 'Linux + GNU একত্রিত', text: 'Kernel + GNU tools = Complete user-friendly OS তৈরি হলো।' },
+                            { year: '1993-95', title: 'প্রথম Popular Distributions', text: 'Slackware, Debian (1993), Red Hat (1994) রিলিজ হলো। Enterprise use শুরু।' },
+                            { year: '2000s+', title: 'Linux everywhere', text: 'Ubuntu (2004) আসলো। Android (Linux based) বিলিয়ন ফোনে চললো। Cloud, IoT, Supercomputers—সব লিনাক্স নির্ভর হয়ে গেলো।' }
+                        ]
+                    }
+                ]
+            },
+
+            // --- Distros ---
+            {
+                type: 'section',
+                title: 'Linux Distributions (Distros) – Overview',
+                subtitle: 'Linux distribution হলো Linux Kernel + User Space Tools + Applications একত্রিত করে তৈরি করা complete OS।',
+                blocks: [
+                    {
+                        type: 'table',
+                        headers: ['Category', 'Examples', 'Use Case'],
+                        rows: [
+                            ['<strong>Desktop Distros</strong>', 'Ubuntu, Debian, Linux Mint', 'Easy installation, GUI-based experience, beginner friendly.'],
+                            ['<strong>Server/Enterprise</strong>', 'RHEL, CentOS, AlmaLinux', 'Commercial support, stable for enterprise servers.'],
+                            ['<strong>Lightweight</strong>', 'Lubuntu, Puppy Linux', 'Low resource PCs, older hardware.'],
+                            ['<strong>Security/Pen-testing</strong>', 'Kali Linux, Parrot', 'Ethical hacking, penetration testing tools pre-installed.'],
+                            ['<strong>Rolling Release</strong>', 'Arch Linux, Manjaro', 'Bleeding-edge latest software features, advanced users.']
+                        ]
+                    },
+                    {
+                        type: 'lts-box',
+                        title: 'LTS (Long Term Support) Version',
+                        text: [
+                            'LTS version হলো একটি Linux distribution release যা দীর্ঘ সময় (সাধারণত ৫ বছর) পর্যন্ত support ও security updates পায়। মূলত <strong>stability এবং reliability</strong> চাওয়ার জন্য তৈরি।',
+                            '<em>উদাহরণ: Ubuntu 22.04 LTS (৫ বছরের সাপোর্ট)। বারবার আপগ্রেড ছাড়া একটানা কাজ করার জন্য প্রযোজ্য।</em>'
+                        ]
+                    }
+                ]
+            },
+
+            // --- Windows vs Linux ---
+            {
+                type: 'section',
+                title: 'Windows vs Linux (Comparison)',
+                subtitle: '<em>খুব গুরুত্বপূর্ণ – Windows খারাপ, Linux ভালো – এমন বলবেন না। এদের design philosophy আলাদা, use-case আলাদা।</em> Properly configured Windows server খুব secure হতে পারে, আবার Poorly configured Linux server খুব insecure হতে পারে।',
+                blocks: [
+                    {
+                        type: 'comparison',
+                        items: [
+                            {
+                                header: '🪟 Windows',
+                                cssClass: 'windows',
+                                list: [
+                                    '<strong>নিয়ন্ত্রণ:</strong> Microsoft তৈরি ও নিয়ন্ত্রণ করে। (Closed source)',
+                                    '<strong>Cost:</strong> License কিনতে হয় (Paid)।',
+                                    '<strong>কাস্টমাইজেশন:</strong> Limited. গাড়ির মতো, ইঞ্জিন বদলানো যায় না।',
+                                    '<strong>File System:</strong> মূলত NTFS (C: drive)।',
+                                    '<strong>Security:</strong> Desktop market বেশি তাই malware বেশি।'
+                                ]
+                            },
+                            {
+                                header: '🐧 Linux',
+                                cssClass: 'linux',
+                                list: [
+                                    '<strong>নিয়ন্ত্রণ:</strong> বিশ্বব্যাপী Community তৈরি করে। (Open source)',
+                                    '<strong>Cost:</strong> Free (Enterprise support বাদে)।',
+                                    '<strong>কাস্টমাইজেশন:</strong> Full customization. বাইকের মতো, ইচ্ছেমতো মডিফাই করা যায়।',
+                                    '<strong>File System:</strong> মূলত EXT4 (root /)।',
+                                    '<strong>Security:</strong> Strong permission framework, Server exploit বেশি টার্গেট করে।'
+                                ]
+                            }
+                        ]
+                    }
+                ]
             }
+        ],
+        questions: [
+            { id: 1, text: "Linux আসলে কী?", options: ["শুধুমাত্র একটি Operating System", "একটি Kernel", "একটি হ্যাকিং টুল", "একটি সাধারণ সফটওয়্যার"], correctAnswer: 1 },
+            { id: 2, text: "Kernel এর মূল কাজ কী?", options: ["ইউজারের সাথে কথা বলা", "স্ক্রিনে আইকন দেখানো", "সরাসরি hardware নিয়ন্ত্রণ করা", "ফাইল ম্যানেজার চালানো"], correctAnswer: 2 },
+            { id: 3, text: "ISO file কী?", options: ["এটি নিজেই একটি OS", "এটি OS install করার প্যাকেট", "একটি হার্ডওয়্যার ড্রাইভার", "একটি প্রোগ্রামিং ভাষা"], correctAnswer: 1 },
+            { id: 4, text: "Linux Kernel-এর স্রষ্টা কে?", options: ["Richard Stallman", "Bill Gates", "Linus Torvalds", "Steve Jobs"], correctAnswer: 2 },
+            { id: 5, text: "নিচের কোনটি LTS (Long Term Support) এর বৈশিষ্ট্য?", options: ["দ্রুততম সফটওয়্যার আপডেট", "দীর্ঘ সময় পর্যন্ত security updates", "শুধু হ্যাকিং এর জন্য তৈরি", "সবচেয়ে নতুন পরীক্ষামূলক ফিচার"], correctAnswer: 1 }
         ]
     },
+
+    // ========================================
+    // CLASS 02 — 27 February 2026
+    // ========================================
     '2026-02-27': {
         title: "Linux Command Line Environment",
+        classNumber: 2,
         description: "Command Line, Terminal, Shell, Kernel, TTY, SSH এবং Linux Command-এর Basic Part নিয়ে বিস্তারিত আলোচনা।",
-        status: "published",
-        content: `
-            <div class="lesson-intro">
-                <h2>Linux Command Line Environment</h2>
-                <h3>Command Line কী?</h3>
-                <p>ধরো তুমি কম্পিউটার দিয়ে কোনো কাজ করাতে চাও। তুমি দুইভাবে বলতে পারো:</p>
-                <ul>
-                    <li>মাউস দিয়ে ক্লিক করে</li>
-                    <li>লিখে কমান্ড দিয়ে</li>
-                </ul>
-                <p>লিখে কাজ বলার পদ্ধতিটাই হলো Command Line।</p>
-                <div class="highlight-box success">
-                    <p><strong>মানে: Command Line = কীবোর্ড দিয়ে লিখে কম্পিউটারকে নির্দেশ দেওয়া?</strong></p>
-                </div>
-                <p>লিখলে <code>date</code> → কম্পিউটার বর্তমান তারিখ ও সময় দেখাবে।</p>
-                <div class="terminal-block">
-                    <code>itbd@server:~$ date<br>Wed Feb 25 10:25:09 +06 2026</code>
-                </div>
-                <p>লিখলে <code>whoami</code> → কম্পিউটার দেখাবে তুমি কোন user হিসেবে লগইন করে আছো।</p>
-                <div class="terminal-block">
-                    <code>itbd@server:~$ whoami<br>itbd</code>
-                </div>
-                <p>এখানে তুমি লিখছো — কম্পিউটার কাজ করছে।</p>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Terminal কী? বোঝার জন্য একটি রেস্টুরেন্ট কল্পনা করি</h2>
-                <p>ধরো তুমি একটা বড়, ব্যস্ত রেস্টুরেন্টে গেলে। ভেতরে কী কী আছে?</p>
-                <div class="table-responsive">
-                    <table class="modern-table">
-                        <thead>
-                            <tr>
-                                <th>বাস্তব জগৎ (রেস্টুরেন্ট)</th>
-                                <th>কম্পিউটার সিস্টেম অংশ</th>
-                                <th>ব্যাখ্যা (সংক্ষেপে)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>তুমি (User)</td>
-                                <td><strong>User</strong></td>
-                                <td>যে নির্দেশ/অর্ডার দেয়</td>
-                            </tr>
-                            <tr>
-                                <td>টেবিল / অর্ডার কাউন্টার</td>
-                                <td><strong>Terminal</strong></td>
-                                <td>যেখানে User ইনপুট দেয়</td>
-                            </tr>
-                            <tr>
-                                <td>ওয়েটার / কাউন্টার স্টাফ</td>
-                                <td><strong>Shell</strong></td>
-                                <td>User-এর নির্দেশ Kernel পর্যন্ত পৌঁছে দেয়</td>
-                            </tr>
-                            <tr>
-                                <td>শেফ</td>
-                                <td><strong>Kernel</strong></td>
-                                <td>মূল প্রসেসিং করে, কাজ বাস্তবায়ন করে</td>
-                            </tr>
-                            <tr>
-                                <td>চুলা, হাঁড়ি, গ্যাস, ফ্রিজ</td>
-                                <td><strong>Hardware</strong></td>
-                                <td>বাস্তব যন্ত্রপাতি যেখানে কাজ সম্পন্ন হয়</td>
-                            </tr>
-                            <tr>
-                                <td>ম্যানেজার</td>
-                                <td><strong>OS</strong></td>
-                                <td>পুরো সিস্টেম পরিচালনা ও সমন্বয় করে</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3>পুরো Flow পরিষ্কারভাবে দেখি</h3>
-                <div class="process-timeline">
-                    <div class="process-step">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h4>ধাপ ১: তুমি টেবিলে বসলে</h4>
-                            <p><strong>(Terminal)</strong></p>
-                        </div>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h4>ধাপ ২: তুমি ওয়েটারকে অর্ডার দিলে</h4>
-                            <p><strong>(Shell)</strong></p>
-                        </div>
-                    </div>
-                    <div class="process-step">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h4>ধাপ ৩: ওয়েটার ম্যানেজারের নিয়ম মেনে অর্ডার পাঠালো</h4>
-                            <p><strong>(OS)</strong></p>
-                        </div>
-                    </div>
-                    <div class="process-step highlight">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h4>ধাপ ৪: ম্যানেজার শেফকে বললো রান্না শুরু করতে</h4>
-                            <p><strong>(Kernel)</strong></p>
-                        </div>
-                    </div>
-                    <div class="process-step highlight">
-                        <div class="step-number">5</div>
-                        <div class="step-content">
-                            <h4>ধাপ ৫: শেফ চুলা-হাঁড়ি ব্যবহার করে রান্না করলো</h4>
-                            <p><strong>(Hardware)</strong></p>
-                        </div>
-                    </div>
-                    <div class="process-step end">
-                        <div class="step-number">6</div>
-                        <div class="step-content">
-                            <h4>ধাপ ৬: খাবার আবার ওয়েটার এনে তোমার সামনে দিল</h4>
-                            <p><strong>(Output)</strong></p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="alert-note">
-                    <strong>গুরুত্বপূর্ণ বিষয়:</strong> তুমি সরাসরি:<br>
-                    ❌ শেফকে ডাকতে পারো না<br>
-                    ❌ চুলা ধরতে পারো না<br>
-                    ❌ রান্নাঘরে ঢুকতে পারো না
-                </div>
-
-                <h3>তাহলে Terminal আসলে কী?</h3>
-                <p>রেস্টুরেন্টে অর্ডার দেওয়ার কয়েকটা ব্যবস্থা থাকতে পারে:</p>
-                <ul>
-                    <li>টেবিলে বসে ওয়েটারকে বলা</li>
-                    <li>কাউন্টারে গিয়ে সরাসরি অর্ডার দেওয়া</li>
-                </ul>
-                <p>এই টেবিল বা কাউন্টার উইন্ডোই হলো Terminal। Terminal হলো সেই জায়গা, যেখানে দাঁড়িয়ে বা বসে তুমি অর্ডার দাও। এটা নিজে রান্না করে না। এটা শুধু যোগাযোগের জায়গা। <strong>Linux-এ Terminal হলো সেই স্ক্রিন/উইন্ডো যেখানে তুমি কমান্ড লেখো।</strong></p>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Shell কী?</h2>
-                <p>এখন ধরো তুমি বললে: "একটা বিরিয়ানি দিন।"</p>
-                <p>তোমার কথা কে শুনলো? ➔ ওয়েটার / কাউন্টার স্টাফ। এই লোকটাই হলো ➔ <strong>Shell</strong>।</p>
-                <div class="cards-grid">
-                    <div class="info-card">
-                        <div class="card-icon">👤</div>
-                        <h3>Shell কী করে? (রেস্টুরেন্টে)</h3>
-                        <ul class="feature-list">
-                            <li>তোমার কথা শোনে</li>
-                            <li>বোঝে</li>
-                            <li>সঠিকভাবে ভেতরে পাঠায়</li>
-                            <li>রান্না হয়ে গেলে ফলাফল এনে দেয়</li>
-                        </ul>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-icon">💻</div>
-                        <h3>Linux-এ Shell:</h3>
-                        <ul class="feature-list">
-                            <li>তুমি কমান্ড লেখো</li>
-                            <li>Shell সেটা পড়ে ও বোঝে</li>
-                            <li>Kernel-এ পাঠায়</li>
-                            <li>ফলাফল এনে দেখায়</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <h2>Kernel (শেফ) কী করে?</h2>
-                <div class="cards-grid">
-                    <div class="info-card">
-                        <div class="card-icon">👨‍🍳</div>
-                        <h3>শেফ (Kernel in Restaurant):</h3>
-                        <ul class="feature-list">
-                            <li>চুলা ব্যবহার করে</li>
-                            <li>হাঁড়ি ব্যবহার করে</li>
-                            <li>আসল কাজটা করে</li>
-                        </ul>
-                        <p><em>(Shell রান্না করে না। Terminal তো একদমই না।)</em></p>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-icon">⚙️</div>
-                        <h3>Linux-এ Kernel:</h3>
-                        <ul class="feature-list">
-                            <li>CPU ব্যবহার করে</li>
-                            <li>RAM ব্যবহার করে</li>
-                            <li>ডিস্ক ব্যবহার করে</li>
-                            <li>আসল কাজটা করে</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="highlight-box">
-                    <h3>Important Note</h3>
-                    <p>এক রেস্টুরেন্টে অনেক টেবিল থাকতে পারে, একাধিক ওয়েটার থাকতে পারে, একেকটা আলাদা স্টাইল থাকতে পারে।</p>
-                    <p><strong>ঠিক তেমনি Linux-এ:</strong> একাধিক Terminal থাকতে পারে, একেকটায় আলাদা Shell চলতে পারে, আলাদা user লগইন থাকতে পারে।</p>
-                </div>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Shell vs Terminal (Example)</h2>
-                <p>নিচের উদাহরণটি ভালো করে দেখো -</p>
-                <div class="terminal-block">
-                    <code>itbd@server:~$ date<br>Wed Feb 25 10:25:09 +06 2026<br>itbd@server:~$<br>itbd@server:~$ whoami<br>itbd<br>itbd@server:~$<br>itbd@server:~$ hostname<br>server</code>
-                </div>
-                
-                <p>স্ক্রিনশটে বা এই উদাহরণে যে কালো উইন্ডোটা দেখা যাচ্ছে, ওটাই Terminal। কিন্তু একটা গুরুত্বপূর্ণ বিষয় পরিষ্কার করি:</p>
-                <div class="alert-note">
-                    <strong>কালো উইন্ডো = Terminal (Terminal Emulator), আর ভেতরে যে $ দিয়ে কমান্ড নিচ্ছে = Shell</strong>
-                </div>
-                <ul class="feature-list">
-                    <li>এই কালো উইন্ডোটা নিজে কিছু বোঝে না। এটা শুধু তোমার লেখা দেখায় এবং আউটপুট দেখায়। <strong>কিন্তু কমান্ড কে বুঝলো? ➔ Shell</strong></li>
-                    <li>তোমার স্ক্রিনের কালো উইন্ডোটা হলো Terminal — এটা রেস্টুরেন্টের অর্ডার কাউন্টারের মতো।</li>
-                    <li>ভেতরে যে <code>$</code> চিহ্নটা দেখা যাচ্ছে, সেটা বোঝায় Shell প্রস্তুত আছে — মানে ওয়েটার দাঁড়িয়ে আছে।</li>
-                    <li>তুমি লিখলে <code>whoami</code> — এটা অর্ডার দেওয়ার মতো।</li>
-                    <li>Shell (ওয়েটার) অর্ডারটা Kernel (বাবুর্চি)-এ পাঠায়।</li>
-                    <li>Kernel বিভিন্ন হার্ডওয়্যার ব্যবহার করে ভেতরে কাজ করে ফলাফল বের করে।</li>
-                    <li>তারপর Shell সেই ফলাফল তোমার সামনে output দেখায়: <code>itbd</code></li>
-                </ul>
-                <p>আশা করি এখন আর Terminal এবং Shell নিয়ে কোনো প্রব্লেম নেই।</p>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Types of Shells (বিভিন্ন প্রকার Shell)</h2>
-                <p>Shell অনেক প্রকারের হতে পারে, এবং তাদের মধ্যে কিছু জনপ্রিয় হলো:</p>
-                <div class="table-responsive">
-                    <table class="modern-table">
-                        <thead>
-                            <tr>
-                                <th>Shell এর নাম</th>
-                                <th>বৈশিষ্ট্য</th>
-                                <th>Default System Example</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>Bash (Bourne Again Shell)</strong></td>
-                                <td>সবচেয়ে জনপ্রিয়, scripting সহজ</td>
-                                <td>Ubuntu, CentOS, RHEL</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Sh (Bourne Shell)</strong></td>
-                                <td>পুরনো Unix shell, scripting সহজ</td>
-                                <td>Legacy systems</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Csh (C Shell)</strong></td>
-                                <td>C-ভাষার মত syntax</td>
-                                <td>BSD Unix</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Tcsh</strong></td>
-                                <td>Csh-এর উন্নত সংস্করণ</td>
-                                <td>BSD/Unix</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Ksh (Korn Shell)</strong></td>
-                                <td>Advanced scripting features</td>
-                                <td>AIX, Solaris</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Zsh (Z Shell)</strong></td>
-                                <td>Modern shell, customization & plugins</td>
-                                <td>Oh-My-Zsh জনপ্রিয়, macOS</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Fish (Friendly Interactive Shell)</strong></td>
-                                <td>Interactive use সহজ, color support</td>
-                                <td>Newer Linux distros</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3>Switching Shells (এক shell থেকে অন্য shell এ switch করা)</h3>
-                <div class="terminal-block">
-                    <code>itbd@server:~$ zsh<br>Command 'zsh' not found, but can be installed with:<br>sudo apt install zsh<br>itbd@server:~$ sudo apt install zsh<br>(...installation process...)<br>itbd@server:~$ zsh<br>server% echo $SHELL<br>/bin/bash<br>server% echo $0<br>zsh<br>server% ps -p $$<br>PID TTY TIME CMD<br>2894 pts/2 00:00:00 zsh<br>server% exit<br>itbd@server:~$ _</code>
-                </div>
-
-                <div class="table-responsive">
-                    <table class="modern-table">
-                        <thead>
-                            <tr>
-                                <th>SL</th>
-                                <th>কমান্ড</th>
-                                <th>কী ঘটেছে</th>
-                                <th>ব্যাখ্যা (সংক্ষেপে)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>1</td><td><code>zsh</code></td><td>Command not found</td><td>সিস্টেমে zsh ইনস্টল ছিল না</td></tr>
-                            <tr><td>2</td><td><code>sudo apt install zsh</code></td><td>Install শুরু</td><td>zsh ইনস্টল হয়েছে</td></tr>
-                            <tr><td>3</td><td><code>zsh</code></td><td>Shell চালু</td><td>zsh shell শুরু হয়েছে</td></tr>
-                            <tr><td>4</td><td><code>echo $SHELL</code></td><td>/bin/bash</td><td>Default shell এখনও bash</td></tr>
-                            <tr><td>5</td><td><code>echo $0</code></td><td>zsh</td><td>বর্তমানে active shell হলো zsh</td></tr>
-                            <tr><td>6</td><td><code>ps -p $$</code></td><td>CMD = zsh</td><td>Process confirm করছে zsh চলছে</td></tr>
-                            <tr><td>7</td><td><code>exit</code></td><td>bash এ ফেরা</td><td>zsh থেকে বের হয়ে আবার bash এ ফিরেছে</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3>Changing Default Shell Permanently</h3>
-                <div class="terminal-block">
-                    <code>itbd@server:~$ echo $SHELL<br>/usr/bin/bash<br>itbd@server:~$ which zsh<br>/usr/bin/zsh<br>itbd@server:~$ chsh -s /usr/bin/zsh<br>Password:<br>itbd@server:~$ exit</code>
-                </div>
-
-                <div class="table-responsive">
-                    <table class="modern-table">
-                        <thead>
-                            <tr>
-                                <th>ধাপ</th>
-                                <th>কমান্ড</th>
-                                <th>কী করবে</th>
-                                <th>ফলাফল</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td>1</td><td><code>which zsh</code></td><td>zsh এর path দেখাবে</td><td>সাধারণত /usr/bin/zsh দেখাবে</td></tr>
-                            <tr><td>2</td><td><code>chsh -s /usr/bin/zsh</code></td><td>Default shell পরিবর্তন করবে</td><td>bash → zsh হবে</td></tr>
-                            <tr><td>3</td><td><code>logout</code> বা <code>exit</code></td><td>সেশন বন্ধ করবে</td><td>নতুন করে login প্রয়োজন</td></tr>
-                            <tr><td>4</td><td>আবার login</td><td>নতুন shell চালু হবে</td><td>এখন auto zsh চালু হবে</td></tr>
-                            <tr><td>5</td><td><code>echo $SHELL</code></td><td>verify করবে</td><td>/usr/bin/zsh দেখাবে</td></tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Shell Facts & Prompt Structure</h2>
-                <div class="qa-container">
-                    <div class="qa-item">
-                        <h4><span class="q-mark">1.</span> RHEL-এর Default Shell</h4>
-                        <p>Red Hat Enterprise Linux (RHEL)-এ ডিফল্ট শেল হলো <strong>bash</strong> (GNU Bourne-Again Shell)। bash হলো পুরনো UNIX শেল Bourne Shell (sh)-এর উন্নত সংস্করণ।</p>
-                    </div>
-                    <div class="qa-item">
-                        <h4><span class="q-mark">2.</span> Shell Prompt কী?</h4>
-                        <p>যখন শেল interactive ভাবে ব্যবহার করা হয়, তখন এটি একটি লেখা দেখায়—এটাই shell prompt। এটি বোঝায় যে শেল এখন ইউজারের কমান্ড নেওয়ার জন্য প্রস্তুত।</p>
-                    </div>
-                    <div class="qa-item">
-                        <h4><span class="q-mark">3.</span> Normal User Prompt ($)</h4>
-                        <p>সাধারণ ইউজার লগইন করলে প্রম্পট <code>$</code> চিহ্ন দিয়ে শেষ হয়। উদাহরণ: <code>[user@host ~]$</code>. এতে বোঝা যায় এটি সাধারণ ইউজার, root না।</p>
-                    </div>
-                    <div class="qa-item">
-                        <h4><span class="q-mark">4.</span> Root Prompt (#)</h4>
-                        <p>যদি শেল root (superuser) হিসেবে চালানো হয়, তাহলে <code>$</code> এর জায়গায় <code>#</code> থাকে। উদাহরণ: <code>[root@host ~]#</code>. এটি ইচ্ছাকৃতভাবে আলাদা রাখা হয়েছে যাতে বোঝা যায় এখন তুমি superuser—ভুল করলে পুরো সিস্টেম ক্ষতিগ্রস্ত হতে পারে।</p>
-                    </div>
-                    <div class="qa-item">
-                        <h4><span class="q-mark">5.</span> Bash এর শক্তি</h4>
-                        <p>bash শুধু কমান্ড চালানোর জন্য না, এটি একটি শক্তিশালী scripting language। এটি দিয়ে automation, task scheduling, এবং জটিল কাজ করা যায়—যা অনেক সময় GUI দিয়ে কঠিন।</p>
-                    </div>
-                </div>
-
-                <h3 class="mt-5">Shell Prompt Structure</h3>
-                <div class="terminal-block text-center" style="font-size: 1.2rem; margin: 2rem 0; text-align: center;">
-                    <code><strong>itbd</strong>@<strong>server</strong>: <strong>~</strong> <strong>$</strong></code><br>
-                    <div style="display: flex; justify-content: space-around; font-size: 0.9rem; color: #64748b; margin-top: 0.5rem; text-align: center;">
-                        <span>১) User</span>
-                        <span>২) Hostname</span>
-                        <span>৩) Directory</span>
-                        <span>৪) Type</span>
-                    </div>
-                </div>
-                
-                <div class="cards-grid">
-                    <div class="info-card">
-                        <div class="card-icon">1️⃣</div>
-                        <h3>itbd (User)</h3>
-                        <p>এটা হলো বর্তমানে যে ইউজার দিয়ে লগইন করা হয়েছে। এখানে itbd ইউজার লগইন করা আছে।</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-icon">2️⃣</div>
-                        <h3>server (Hostname)</h3>
-                        <p>এটা সিস্টেমের hostname। মানে এই কম্পিউটার/সার্ভারের নাম হলো server।</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-icon">3️⃣</div>
-                        <h3>~ (Working Directory)</h3>
-                        <p>ইউজার এই মুহূর্তে কোন ডিরেক্টরিতে আছে সেটা বোঝাচ্ছে। <code>~</code> মানে হচ্ছে লগইন করা ইউজারের হোম ডিরেক্টরি। যদি সে /etc এর ভেতর থাকতো তাহলে এখানে <code>/etc</code> দেখাতো।</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-icon">4️⃣</div>
-                        <h3>$ / # (User Type)</h3>
-                        <p><code>$</code> → Normal / Standard User<br><code>#</code> → Superuser (root)</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Shell Command-এর Basic Part</h2>
-                <p>যখন আমরা shell prompt-এ কোনো command লিখি, সেটা সাধারণত ৩টা অংশে ভাগ করা যায়। পুরো লাইনটাকে বলা হয়: <strong>Command Line</strong></p>
-                
-                <div class="table-responsive">
-                    <table class="modern-table">
-                        <thead>
-                            <tr>
-                                <th>অংশ</th>
-                                <th>বিবরণ</th>
-                                <th>উদাহরণ</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>1. Command</strong></td>
-                                <td>এটি হলো যে প্রোগ্রামটি চালাতে চাই। এটা সবসময় শুরুতে থাকে।</td>
-                                <td><code>ls</code>, <code>useradd</code>, <code>hostnamectl</code></td>
-                            </tr>
-                            <tr>
-                                <td><strong>2. Options (Flags)</strong></td>
-                                <td>এগুলো command-এর আচরণ পরিবর্তন করে। সাধারণত <code>-</code> বা <code>--</code> দিয়ে শুরু হয়।</td>
-                                <td><code>-l</code>, <code>-a</code>, <code>-L</code></td>
-                            </tr>
-                            <tr>
-                                <td><strong>3. Arguments</strong></td>
-                                <td>target বা value যেগুলোর উপর command কাজ করে অথবা command-কে প্রয়োজনীয় তথ্য দেয়।</td>
-                                <td><code>user01</code>, <code>/etc</code></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <h3>Argument Examples</h3>
-                <div class="comparison-grid mt-4">
-                    <div class="comp-card windows">
-                        <div class="comp-header">Example 1: usermod -L user01</div>
-                        <ul class="comp-list">
-                            <li><strong>Command:</strong> <code>usermod</code> (user modify করার প্রোগ্রাম)</li>
-                            <li><strong>Option:</strong> <code>-L</code> (lock option)</li>
-                            <li><strong>Argument:</strong> <code>user01</code> (target object, যার account lock করা হবে)</li>
-                        </ul>
-                    </div>
-                    <div class="comp-card linux">
-                        <div class="comp-header">Example 2: hostnamectl set-hostname ITBD-Training</div>
-                        <ul class="comp-list">
-                            <li><strong>Command:</strong> <code>hostnamectl</code></li>
-                            <li><strong>Arg 1:</strong> <code>set-hostname</code> (action নির্ধারণ করছে)</li>
-                            <li><strong>Arg 2:</strong> <code>ITBD-Training</code> (নতুন নাম value দিচ্ছে)</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="alert-note mt-4">
-                    <strong>Special Note:</strong> অনেক command আছে যেগুলো কোনো option বা argument ছাড়াই চলতে পারে (যেমন <code>date</code>, <code>whoami</code>, <code>pwd</code>)। আবার কিছু command আছে যেগুলো argument ছাড়া চলেই না (যেমন <code>cp file1 file2</code>)।
-                </div>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Logging in to a Local Computer</h2>
-                <p>Shell চালাতে হলে আগে কম্পিউটারে লগইন করতে হবে। লগইন করার জন্য যে text-based interface ব্যবহার করা হয়, সেটাকে বলে: <strong>Terminal</strong></p>
-                
-                <div class="cards-grid">
-                    <div class="info-card">
-                        <div class="card-icon">🖥️</div>
-                        <h3>1. Physical Console</h3>
-                        <p>যদি কম্পিউটারের সাথে সরাসরি monitor + keyboard যুক্ত থাকে, তাহলে সেটাকে বলে: Physical Console।</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-icon">🖧</div>
-                        <h3>2. Virtual Console (TTY)</h3>
-                        <p>Linux একাধিক login session একসাথে চালাতে পারে। এগুলোকে বলে Virtual Console (TTY)। <code>Ctrl + Alt + F1</code> থেকে <code>F6</code> দিয়ে switch করা যায়।</p>
-                    </div>
-                    <div class="info-card">
-                        <div class="card-icon">🖱️</div>
-                        <h3>3. Graphical Login (GUI)</h3>
-                        <p>graphical environment চালু হবে, তারপর terminal program খুলতে হবে। Server-এ সাধারণত resource বাঁচানোর জন্য GUI চালানো হয় না।</p>
-                    </div>
-                </div>
-
-                <h3 class="mt-5">RHEL 8 / 9 TTY Table Mapping</h3>
-                <div class="table-responsive">
-                    <table class="modern-table">
-                        <thead>
-                            <tr>
-                                <th>TTY</th>
-                                <th>ব্যবহার</th>
-                                <th>সহজ ভাষায়</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>tty1</strong></td>
-                                <td>Graphical login + GUI session (GNOME)</td>
-                                <td>GUI চালানোর জন্য, যেখানে তুমি mouse + desktop পাবে</td>
-                            </tr>
-                            <tr>
-                                <td><strong>tty2–tty6</strong></td>
-                                <td>Text login (CLI)</td>
-                                <td>শুধুমাত্র keyboard দিয়ে login করতে হবে, command-line interface</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="lesson-section">
-                <h2>Remote login over network (SSH)</h2>
-                <p>অনেক সময় Linux admin বা user-দের দূর থেকে কোনো সার্ভার বা কম্পিউটারে কাজ করতে হয়। অনেক সার্ভার এখন <strong>headless</strong> – অর্থাৎ, physical monitor, keyboard বা mouse নেই।</p>
-                
-                <div class="highlight-box">
-                    <h3>Headless Server কী?</h3>
-                    <p>সার্ভার/VM নিজের জন্য কোনো physical screen, keyboard, mouse নেই। ব্যবহারকারীকে কাজ network বা remote interface (SSH/RDP) দিয়ে করতে হয়।</p>
-                </div>
-
-                <h3>SSH (Secure Shell)</h3>
-                <p>Linux এবং macOS-এ built-in ssh command-line tool আছে। SSH encrypts the connection, তাই communication, password বা data safe থাকে।</p>
-                <div class="terminal-block">
-                    <code>ssh remoteuser@remotehost<br>remoteuser@remotehost's password: ********<br>[remoteuser@remotehost ~]$</code>
-                </div>
-
-                <h3>Public Key Authentication (password-less login)</h3>
-                <p>কিছু systems (যেমন cloud instances) password login allow করে না। এর বিকল্প হলো public/private key authentication।</p>
-                <ul class="feature-list">
-                    <li>User-এর machine-এ থাকে private key (গোপন)।</li>
-                    <li>Remote server-এর user account-এ থাকে matching public key।</li>
-                    <li>Login করলে SSH private key ব্যবহার করে public key verify করে, password চায় না।</li>
-                </ul>
-                
-                <div class="terminal-block mt-3">
-                    <code>ssh -i ~/.ssh/my_private_key remoteuser@remotehost</code>
-                </div>
-                <p>এখানে <code>-i</code> option ব্যবহার করে private key specify করা হচ্ছে।</p>
-            </div>
-        `,
-        questions: [
+        sections: [
+            // --- Command Line ---
             {
-                id: 6,
-                text: "Command Line-এর ৩টি অংশ কী কী?",
-                options: [
-                    "Terminal, Shell, Kernel",
-                    "Command, Options, Arguments",
-                    "User, Hostname, Directory",
-                    "Hardware, OS, Software"
-                ],
-                correctAnswer: 1
+                type: 'section',
+                title: 'Command Line কী?',
+                blocks: [
+                    { type: 'paragraph', text: 'ধরো তুমি কম্পিউটার দিয়ে কোনো কাজ করাতে চাও। তুমি দুইভাবে বলতে পারো:' },
+                    { type: 'list', items: ['মাউস দিয়ে ক্লিক করে', 'লিখে কমান্ড দিয়ে'] },
+                    { type: 'paragraph', text: 'লিখে কাজ বলার পদ্ধতিটাই হলো Command Line।' },
+                    { type: 'highlight', text: '<strong>মানে: Command Line = কীবোর্ড দিয়ে লিখে কম্পিউটারকে নির্দেশ দেওয়া</strong>' },
+                    { type: 'paragraph', text: 'লিখলে <code>date</code> → কম্পিউটার বর্তমান তারিখ ও সময় দেখাবে।' },
+                    { type: 'terminal', commands: ['itbd@server:~$ date', 'Wed Feb 25 10:25:09 +06 2026'] },
+                    { type: 'paragraph', text: 'লিখলে <code>whoami</code> → কম্পিউটার দেখাবে তুমি কোন user হিসেবে লগইন করে আছো।' },
+                    { type: 'terminal', commands: ['itbd@server:~$ whoami', 'itbd'] }
+                ]
             },
+
+            // --- Terminal (Restaurant Analogy) ---
             {
-                id: 7,
-                text: "Shell prompt-এ ~ চিহ্নটি কী নির্দেশ করে?",
-                options: [
-                    "Root directory",
-                    "Working directory",
-                    "Home directory",
-                    "Previous directory"
-                ],
-                correctAnswer: 2
+                type: 'section',
+                title: 'Terminal কী? (রেস্টুরেন্ট Analogy)',
+                subtitle: 'ধরো তুমি একটা বড়, ব্যস্ত রেস্টুরেন্টে গেলে। ভেতরে কী কী আছে?',
+                blocks: [
+                    {
+                        type: 'table',
+                        headers: ['বাস্তব জগৎ (রেস্টুরেন্ট)', 'কম্পিউটার সিস্টেম অংশ', 'ব্যাখ্যা (সংক্ষেপে)'],
+                        rows: [
+                            ['তুমি (User)', '<strong>User</strong>', 'যে নির্দেশ/অর্ডার দেয়'],
+                            ['টেবিল / অর্ডার কাউন্টার', '<strong>Terminal</strong>', 'যেখানে User ইনপুট দেয়'],
+                            ['ওয়েটার / কাউন্টার স্টাফ', '<strong>Shell</strong>', 'User-এর নির্দেশ Kernel পর্যন্ত পৌঁছে দেয়'],
+                            ['শেফ', '<strong>Kernel</strong>', 'মূল প্রসেসিং করে, কাজ বাস্তবায়ন করে'],
+                            ['চুলা, হাঁড়ি, গ্যাস, ফ্রিজ', '<strong>Hardware</strong>', 'বাস্তব যন্ত্রপাতি যেখানে কাজ সম্পন্ন হয়'],
+                            ['ম্যানেজার', '<strong>OS</strong>', 'পুরো সিস্টেম পরিচালনা ও সমন্বয় করে']
+                        ]
+                    },
+                    {
+                        type: 'timeline',
+                        steps: [
+                            { title: 'তুমি টেবিলে বসলে', text: '<strong>(Terminal)</strong>' },
+                            { title: 'তুমি ওয়েটারকে অর্ডার দিলে', text: '<strong>(Shell)</strong>' },
+                            { title: 'ওয়েটার ম্যানেজারের নিয়ম মেনে অর্ডার পাঠালো', text: '<strong>(OS)</strong>' },
+                            { title: 'ম্যানেজার শেফকে বললো রান্না শুরু করতে', text: '<strong>(Kernel)</strong>', highlight: true },
+                            { title: 'শেফ চুলা-হাঁড়ি ব্যবহার করে রান্না করলো', text: '<strong>(Hardware)</strong>', highlight: true },
+                            { title: 'খাবার আবার ওয়েটার এনে তোমার সামনে দিল', text: '<strong>(Output)</strong>' }
+                        ]
+                    },
+                    { type: 'alert', label: 'গুরুত্বপূর্ণ', text: 'তুমি সরাসরি: ❌ শেফকে ডাকতে পারো না ❌ চুলা ধরতে পারো না ❌ রান্নাঘরে ঢুকতে পারো না' },
+                    { type: 'paragraph', text: '<strong>Linux-এ Terminal হলো সেই স্ক্রিন/উইন্ডো যেখানে তুমি কমান্ড লেখো।</strong> এটা নিজে রান্না করে না। এটা শুধু যোগাযোগের জায়গা।' }
+                ]
             },
+
+            // --- Shell & Kernel ---
             {
-                id: 8,
-                text: "$ চিহ্নটি কোন ধরনের user নির্দেশ করে?",
-                options: [
-                    "Superuser (root)",
-                    "Normal (standard) user",
-                    "System user",
-                    "Guest user"
-                ],
-                correctAnswer: 1
+                type: 'section',
+                title: 'Shell ও Kernel কী?',
+                blocks: [
+                    { type: 'paragraph', text: 'ধরো তুমি বললে: "একটা বিরিয়ানি দিন।" তোমার কথা কে শুনলো? ➔ ওয়েটার / কাউন্টার স্টাফ। এই লোকটাই হলো ➔ <strong>Shell</strong>।' },
+                    {
+                        type: 'cards',
+                        items: [
+                            { icon: '👤', title: 'Shell কী করে?', list: ['তোমার কথা শোনে', 'বোঝে', 'সঠিকভাবে ভেতরে পাঠায়', 'রান্না হয়ে গেলে ফলাফল এনে দেয়'] },
+                            { icon: '⚙️', title: 'Linux-এ Kernel:', list: ['CPU ব্যবহার করে', 'RAM ব্যবহার করে', 'ডিস্ক ব্যবহার করে', 'আসল কাজটা করে'] }
+                        ]
+                    },
+                    { type: 'highlight', text: '<strong>ঠিক তেমনি Linux-এ:</strong> একাধিক Terminal থাকতে পারে, একেকটায় আলাদা Shell চলতে পারে, আলাদা user লগইন থাকতে পারে।' }
+                ]
             },
+
+            // --- Shell vs Terminal Example ---
             {
-                id: 9,
-                text: "Remote login secure করার protocol কোনটি?",
-                options: [
-                    "FTP",
-                    "HTTP",
-                    "SSH (Secure Shell)",
-                    "Telnet"
-                ],
-                correctAnswer: 2
+                type: 'section',
+                title: 'Shell vs Terminal (Example)',
+                blocks: [
+                    { type: 'terminal', commands: ['itbd@server:~$ date', 'Wed Feb 25 10:25:09 +06 2026', 'itbd@server:~$ whoami', 'itbd', 'itbd@server:~$ hostname', 'server'] },
+                    { type: 'alert', label: 'Key Point', text: 'কালো উইন্ডো = Terminal (Terminal Emulator), আর ভেতরে যে $ দিয়ে কমান্ড নিচ্ছে = Shell' }
+                ]
             },
+
+            // --- Types of Shells ---
             {
-                id: 10,
-                text: "RHEL-এর Default Shell কোনটি?",
-                options: [
-                    "Zsh",
-                    "Fish",
-                    "Bash (Bourne Again Shell)",
-                    "Sh"
-                ],
-                correctAnswer: 2
+                type: 'section',
+                title: 'Types of Shells (বিভিন্ন প্রকার Shell)',
+                blocks: [
+                    {
+                        type: 'table',
+                        headers: ['Shell এর নাম', 'বৈশিষ্ট্য', 'Default System Example'],
+                        rows: [
+                            ['<strong>Bash</strong>', 'সবচেয়ে জনপ্রিয়, scripting সহজ', 'Ubuntu, CentOS, RHEL'],
+                            ['<strong>Sh</strong>', 'পুরনো Unix shell', 'Legacy systems'],
+                            ['<strong>Csh</strong>', 'C-ভাষার মত syntax', 'BSD Unix'],
+                            ['<strong>Tcsh</strong>', 'Csh-এর উন্নত সংস্করণ', 'BSD/Unix'],
+                            ['<strong>Ksh</strong>', 'Advanced scripting features', 'AIX, Solaris'],
+                            ['<strong>Zsh</strong>', 'Modern shell, customization & plugins', 'macOS'],
+                            ['<strong>Fish</strong>', 'Interactive use সহজ, color support', 'Newer Linux distros']
+                        ]
+                    },
+                    { type: 'subheading', text: 'Switching Shells' },
+                    { type: 'terminal', commands: ['itbd@server:~$ zsh', 'Command \'zsh\' not found...', 'itbd@server:~$ sudo apt install zsh', 'itbd@server:~$ zsh', 'server% echo $SHELL', '/bin/bash', 'server% echo $0', 'zsh', 'server% exit'] },
+                    {
+                        type: 'table',
+                        headers: ['SL', 'কমান্ড', 'কী ঘটেছে', 'ব্যাখ্যা'],
+                        rows: [
+                            ['1', '<code>zsh</code>', 'Command not found', 'সিস্টেমে zsh ইনস্টল ছিল না'],
+                            ['2', '<code>sudo apt install zsh</code>', 'Install শুরু', 'zsh ইনস্টল হয়েছে'],
+                            ['3', '<code>zsh</code>', 'Shell চালু', 'zsh shell শুরু হয়েছে'],
+                            ['4', '<code>echo $SHELL</code>', '/bin/bash', 'Default shell এখনও bash'],
+                            ['5', '<code>echo $0</code>', 'zsh', 'বর্তমানে active shell হলো zsh'],
+                            ['6', '<code>ps -p $$</code>', 'CMD = zsh', 'Process confirm করছে zsh চলছে'],
+                            ['7', '<code>exit</code>', 'bash এ ফেরা', 'zsh থেকে বের হয়ে bash-এ ফিরেছে']
+                        ]
+                    },
+                    { type: 'subheading', text: 'Changing Default Shell Permanently' },
+                    { type: 'terminal', commands: ['itbd@server:~$ echo $SHELL', '/usr/bin/bash', 'itbd@server:~$ which zsh', '/usr/bin/zsh', 'itbd@server:~$ chsh -s /usr/bin/zsh', 'Password:', 'itbd@server:~$ exit'] },
+                    {
+                        type: 'table',
+                        headers: ['ধাপ', 'কমান্ড', 'কী করবে', 'ফলাফল'],
+                        rows: [
+                            ['1', '<code>which zsh</code>', 'zsh এর path দেখাবে', '/usr/bin/zsh'],
+                            ['2', '<code>chsh -s /usr/bin/zsh</code>', 'Default shell পরিবর্তন', 'bash → zsh হবে'],
+                            ['3', '<code>exit</code>', 'সেশন বন্ধ', 'নতুন login প্রয়োজন'],
+                            ['4', 'আবার login', 'নতুন shell চালু হবে', 'auto zsh চালু হবে'],
+                            ['5', '<code>echo $SHELL</code>', 'verify করবে', '/usr/bin/zsh দেখাবে']
+                        ]
+                    }
+                ]
+            },
+
+            // --- Shell Facts & Prompt Structure ---
+            {
+                type: 'section',
+                title: 'Shell Facts & Prompt Structure',
+                blocks: [
+                    {
+                        type: 'numbered-facts',
+                        items: [
+                            { title: 'RHEL-এর Default Shell', text: 'Red Hat Enterprise Linux (RHEL)-এ ডিফল্ট শেল হলো <strong>bash</strong> (GNU Bourne-Again Shell)। bash হলো পুরনো UNIX শেল Bourne Shell (sh)-এর উন্নত সংস্করণ।' },
+                            { title: 'Shell Prompt কী?', text: 'যখন শেল interactive ভাবে ব্যবহার করা হয়, তখন এটি একটি লেখা দেখায়—এটাই shell prompt। এটি বোঝায় যে শেল এখন ইউজারের কমান্ড নেওয়ার জন্য প্রস্তুত।' },
+                            { title: 'Normal User Prompt ($)', text: 'সাধারণ ইউজার লগইন করলে প্রম্পট <code>$</code> চিহ্ন দিয়ে শেষ হয়। উদাহরণ: <code>[user@host ~]$</code>' },
+                            { title: 'Root Prompt (#)', text: 'যদি শেল root (superuser) হিসেবে চালানো হয়, তাহলে <code>$</code> এর জায়গায় <code>#</code> থাকে। উদাহরণ: <code>[root@host ~]#</code>' },
+                            { title: 'Bash এর শক্তি', text: 'bash শুধু কমান্ড চালানোর জন্য না, এটি একটি শক্তিশালী scripting language। এটি দিয়ে automation, task scheduling, এবং জটিল কাজ করা যায়।' }
+                        ]
+                    },
+                    { type: 'subheading', text: 'Shell Prompt Structure' },
+                    {
+                        type: 'prompt-structure',
+                        parts: [
+                            { label: '১) User', value: 'itbd' },
+                            { label: '②', value: '@' },
+                            { label: '২) Hostname', value: 'server' },
+                            { label: '③', value: ': ' },
+                            { label: '৩) Directory', value: '~ ' },
+                            { label: '৪) Type', value: '$' }
+                        ]
+                    },
+                    {
+                        type: 'cards',
+                        items: [
+                            { icon: '1️⃣', title: 'itbd (User)', text: 'এটা হলো বর্তমানে যে ইউজার দিয়ে লগইন করা হয়েছে।' },
+                            { icon: '2️⃣', title: 'server (Hostname)', text: 'এটা সিস্টেমের hostname। মানে এই কম্পিউটার/সার্ভারের নাম।' },
+                            { icon: '3️⃣', title: '~ (Working Directory)', text: '<code>~</code> মানে লগইন করা ইউজারের হোম ডিরেক্টরি। যদি <code>/etc</code> তে থাকতো তাহলে <code>/etc</code> দেখাতো।' },
+                            { icon: '4️⃣', title: '$ / # (User Type)', text: '<code>$</code> → Normal User<br><code>#</code> → Superuser (root)' }
+                        ]
+                    }
+                ]
+            },
+
+            // --- Shell Command Basic Parts ---
+            {
+                type: 'section',
+                title: "Shell Command-এর Basic Part",
+                subtitle: 'যখন আমরা shell prompt-এ কোনো command লিখি, সেটা সাধারণত ৩টা অংশে ভাগ করা যায়। পুরো লাইনটাকে বলা হয়: <strong>Command Line</strong>',
+                blocks: [
+                    {
+                        type: 'table',
+                        headers: ['অংশ', 'বিবরণ', 'উদাহরণ'],
+                        rows: [
+                            ['<strong>1. Command</strong>', 'যে প্রোগ্রামটি চালাতে চাই। সবসময় শুরুতে থাকে।', '<code>ls</code>, <code>useradd</code>, <code>hostnamectl</code>'],
+                            ['<strong>2. Options (Flags)</strong>', 'command-এর আচরণ পরিবর্তন করে। <code>-</code> বা <code>--</code> দিয়ে শুরু হয়।', '<code>-l</code>, <code>-a</code>, <code>-L</code>'],
+                            ['<strong>3. Arguments</strong>', 'target বা value যেগুলোর উপর command কাজ করে।', '<code>user01</code>, <code>/etc</code>']
+                        ]
+                    },
+                    {
+                        type: 'comparison',
+                        items: [
+                            { header: 'Example 1: usermod -L user01', cssClass: 'windows', list: ['<strong>Command:</strong> <code>usermod</code>', '<strong>Option:</strong> <code>-L</code> (lock option)', '<strong>Argument:</strong> <code>user01</code> (target object)'] },
+                            { header: 'Example 2: hostnamectl set-hostname ITBD-Training', cssClass: 'linux', list: ['<strong>Command:</strong> <code>hostnamectl</code>', '<strong>Arg 1:</strong> <code>set-hostname</code> (action)', '<strong>Arg 2:</strong> <code>ITBD-Training</code> (value)'] }
+                        ]
+                    },
+                    { type: 'alert', label: 'Special Note', text: 'অনেক command আছে যেগুলো কোনো option/argument ছাড়াই চলতে পারে (যেমন <code>date</code>, <code>whoami</code>, <code>pwd</code>)। আবার কিছু command আছে যেগুলো argument ছাড়া চলেই না (যেমন <code>cp file1 file2</code>)।' }
+                ]
+            },
+
+            // --- Login Methods ---
+            {
+                type: 'section',
+                title: 'Logging in to a Local Computer',
+                subtitle: 'Shell চালাতে হলে আগে কম্পিউটারে লগইন করতে হবে।',
+                blocks: [
+                    {
+                        type: 'cards',
+                        items: [
+                            { icon: '🖥️', title: '1. Physical Console', text: 'কম্পিউটারের সাথে সরাসরি monitor + keyboard যুক্ত থাকলে সেটাকে বলে Physical Console।' },
+                            { icon: '🖧', title: '2. Virtual Console (TTY)', text: 'Linux একাধিক login session একসাথে চালাতে পারে। <code>Ctrl + Alt + F1</code> থেকে <code>F6</code> দিয়ে switch করা যায়।' },
+                            { icon: '🖱️', title: '3. Graphical Login (GUI)', text: 'Graphical environment চালু হবে, তারপর terminal program খুলতে হবে। Server-এ সাধারণত GUI চালানো হয় না।' }
+                        ]
+                    },
+                    { type: 'subheading', text: 'RHEL 8 / 9 TTY Table Mapping' },
+                    {
+                        type: 'table',
+                        headers: ['TTY', 'ব্যবহার', 'সহজ ভাষায়'],
+                        rows: [
+                            ['<strong>tty1</strong>', 'Graphical login + GUI session (GNOME)', 'GUI চালানোর জন্য'],
+                            ['<strong>tty2–tty6</strong>', 'Text login (CLI)', 'শুধুমাত্র keyboard দিয়ে CLI login']
+                        ]
+                    }
+                ]
+            },
+
+            // --- SSH ---
+            {
+                type: 'section',
+                title: 'Remote Login over Network (SSH)',
+                subtitle: 'অনেক সার্ভার <strong>headless</strong> – অর্থাৎ, physical monitor, keyboard বা mouse নেই।',
+                blocks: [
+                    { type: 'highlight', title: 'Headless Server কী?', text: 'সার্ভার/VM নিজের জন্য কোনো physical screen, keyboard, mouse নেই। ব্যবহারকারীকে কাজ network বা remote interface (SSH/RDP) দিয়ে করতে হয়।' },
+                    { type: 'subheading', text: 'SSH (Secure Shell)' },
+                    { type: 'paragraph', text: 'Linux এবং macOS-এ built-in ssh command-line tool আছে। SSH encrypts the connection, তাই communication, password বা data safe থাকে।' },
+                    { type: 'terminal', commands: ['ssh remoteuser@remotehost', "remoteuser@remotehost's password: ********", '[remoteuser@remotehost ~]$'] },
+                    { type: 'subheading', text: 'Public Key Authentication (password-less login)' },
+                    { type: 'paragraph', text: 'কিছু systems (যেমন cloud instances) password login allow করে না। এর বিকল্প হলো public/private key authentication।' },
+                    { type: 'terminal', commands: ['ssh -i ~/.ssh/my_private_key remoteuser@remotehost'] },
+                    { type: 'paragraph', text: 'এখানে <code>-i</code> option ব্যবহার করে private key specify করা হচ্ছে।' }
+                ]
             }
+        ],
+        questions: [
+            { id: 6, text: "Command Line-এর ৩টি অংশ কী কী?", options: ["Terminal, Shell, Kernel", "Command, Options, Arguments", "User, Hostname, Directory", "Hardware, OS, Software"], correctAnswer: 1 },
+            { id: 7, text: "Shell prompt-এ ~ চিহ্নটি কী নির্দেশ করে?", options: ["Root directory", "Working directory", "Home directory", "Previous directory"], correctAnswer: 2 },
+            { id: 8, text: "$ চিহ্নটি কোন ধরনের user নির্দেশ করে?", options: ["Superuser (root)", "Normal (standard) user", "System user", "Guest user"], correctAnswer: 1 },
+            { id: 9, text: "Remote login secure করার protocol কোনটি?", options: ["FTP", "HTTP", "SSH (Secure Shell)", "Telnet"], correctAnswer: 2 },
+            { id: 10, text: "RHEL-এর Default Shell কোনটি?", options: ["Zsh", "Fish", "Bash (Bourne Again Shell)", "Sh"], correctAnswer: 2 }
         ]
     }
 };
